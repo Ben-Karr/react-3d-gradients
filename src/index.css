@@ -1,13 +1,53 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: sans-serif;
+  overflow: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.settings {
+  width: 200px;
+  padding: 10px;
+  margin-top: 10px;
+  box-shadow: 1px 0px 0px 0px rgb(119, 119, 119);
+}
+
+.settings h3 {
+  color: #313131;
+}
+
+.error {
+  background: gray;
+}
+
+.axis line {
+  stroke: #C0C0BB;
+}
+
+.axis text{
+  font-weight: lighter;
+  fill: #696969;
+}
+
+.title {
+  font-size: 1.5em;
+  fill: #313131;
+}
+
+path {
+  fill: none;
+  stroke: rgb(255, 100, 100);
+  stroke-width: 2px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.data-points {
+  fill: rgb(100, 100, 255);
+  stroke: black;
+  stroke-width: 0.5;
 }
