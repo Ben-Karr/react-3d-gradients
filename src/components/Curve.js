@@ -1,12 +1,42 @@
-import { curveNatural, line } from 'd3'
+import Plot from 'react-plotly.js';
 
-export  function Curve({points, xScale, yScale}) {
-    return <path 
-        d={line()
-            .x(d=>xScale(d[0]))
-            .y(d=>yScale(d[1]))
-            .curve(curveNatural)
-                (points)
+export  function Curve({xs, ys, guessedYs}) {
+    const plot_layout = 
+        {
+            title: 'Data Plot with approximated origin function',
+            height: 800,
+            xaxis: {
+                title: 'x'
+            },
+            yaxis: {
+                title: 'f(x)'
+            },
+            showlegend: false,
+            margin: {
+                l: 50,
+                r: 0,
+                b: 50,
+                t: 100,
+                pad: 0,
+            }
         }
-    />
+    const scatterData =
+        {
+            x: xs,
+            y: ys,
+            type: 'scatter',
+            mode: 'markers',
+            marker: {color: 'blue'},
+            name: 'Data Points',
+        }
+    const curveData =
+        {
+            x: xs,
+            y: guessedYs,
+            type: 'scatter',
+            mode: 'lines',
+            marker: {color: 'red'},
+            name: 'Approximation',
+        }
+    return <Plot data={[scatterData, curveData]} layout={plot_layout} />
 }

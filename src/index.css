@@ -1,12 +1,11 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  overflow: hidden;
 }
 
 .container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .settings {
