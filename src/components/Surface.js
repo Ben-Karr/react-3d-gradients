@@ -1,11 +1,10 @@
 import Plot from 'react-plotly.js'
 
-export function Surface({a, b, loss, as, bs, ls}) {
+export function Surface({a, b, loss, as, bs, ls, gradients}) {
 
     const plot_layout = 
         {
             title: '3D plot of loss surface with current parameter point and gradient',
-            uirevision: 'true', //rmv doesnt help
             height: 800,
             scene: {
                 //camera: {eye: {x: 1.2, y: 1.2, z: 1}},
@@ -26,7 +25,8 @@ export function Surface({a, b, loss, as, bs, ls}) {
             b: 0,
             t: 100,
             pad: 0,
-            }              
+            },
+            showlegend: false,          
         }
     
     const point_trace = 
@@ -36,13 +36,13 @@ export function Surface({a, b, loss, as, bs, ls}) {
             z: [loss],
             type: 'scatter3d',
             marker: {
-            color: 'white', 
-            size:10, 
-            symbol: 'circle',  //cross, x
-            line: {
-                color: 'black',
-                width: 1,
-            },
+                color: 'white', 
+                size:5, 
+                symbol: 'circle',  //cross, x
+                line: {
+                    color: 'black',
+                    width: 1,
+                },
             },
         }
 
@@ -56,5 +56,20 @@ export function Surface({a, b, loss, as, bs, ls}) {
             name: 'Loss Surface',
             opacity: 0.7,
         }
-    return <Plot data={[point_trace, surface_trace]} layout={plot_layout} />
+
+        const gradient_trace =
+        { // the point (a,b) in the loss surface
+            x: [a, a - gradients[0]],
+            y: [b, b - gradients[1]],
+            z: [loss ,loss],
+            type: 'scatter3d',
+            mode: 'lines',
+            opacity: 1,
+            line: {
+                width: 6,
+                color: 'black'
+            },
+            showscale: false
+        }
+    return <Plot data={[point_trace, surface_trace, gradient_trace]} layout={plot_layout} />
 }
