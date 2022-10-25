@@ -13,16 +13,8 @@ function generateNoise(scale) {
     return (Math.random()-0.5) * scale;
 }
 
-export function addNoise(x, multScale=0.4, addScale=20) {
+export function addNoise(x, multScale=1.2, addScale=25) {
     return x * (1+generateNoise(multScale)) + generateNoise(addScale);
-}
-
-export function mae(targets, preds){
-    let loss = 0;
-    for (let i=0; i<targets.length; i++){
-        loss += Math.abs(targets[i] - preds[i]);
-      }
-    return loss/targets.length;
 }
 
 export function mse(targets, preds) {
@@ -31,14 +23,6 @@ export function mse(targets, preds) {
       loss += Math.pow(targets[i] - preds[i], 2);
     }
     return loss/targets.length;
-  }
-
-export function rmse(targets, preds) {
-    let loss = 0;
-    for (let i=0; i<targets.length; i++){
-      loss += Math.pow(targets[i] - preds[i], 2);
-    }
-    return Math.sqrt(loss/targets.length);
   }
 
 function sumPowX(xs, e) {
@@ -57,32 +41,30 @@ export function generateGradientCoeffs(xs, ys){
     return {
         'm':   xs.length,
         'x2y': sumPowXY(xs, ys, 2),
-        'x4':  sumPowX(xs, 4),
-        'x3':  sumPowX(xs, 3),
+        'x4':  sumPowX (xs, 4),
+        'x3':  sumPowX (xs, 3),
         'xy':  sumPowXY(xs, ys, 1),
-        'x2':  sumPowX(xs, 2),
+        'x2':  sumPowX (xs, 2),
     }
 }
 
 function gradA_mse(a,b,coeffs){
-    return 2*(a*coeffs.x4 - coeffs.x2y - b*coeffs.x3)/coeffs.m;
+    return -2/coeffs.m*(-a*coeffs.x4 + coeffs.x2y - b*coeffs.x3);
 }
 
 function gradB_mse(a,b,coeffs){
-    return 2*(coeffs.xy - a*coeffs.x3 - b*coeffs.x2)/coeffs.m;
+    return -2/coeffs.m*(coeffs.xy - a*coeffs.x3 - b*coeffs.x2);
 }
 
 export function calcGrads_mse(a, b, coeffs) {
     const grad_a = gradA_mse(a,b,coeffs);
     const grad_b = gradB_mse(a,b,coeffs);
-    const α = 2e-4;
-    return [α * grad_a, α * grad_b];
+    return [grad_a, grad_b];
 }
 
 export function generateSurface(as, bs, xs, ys){
-    const ls = [] // needs to be y-rows \times x-cols for Plotly
-    //for (let j=0; j<bs.length; j++){
-    for (let j=bs.length-1; j>=0; j--){
+    const ls = [] // needs to be y-rows \times x-cols (ascending) for Plotly
+    for (let j=0; j<bs.length; j++){
         const row = []
         for (let i=0; i<as.length; i++){
             row.push(mse(ys, xs.map(x => mk_quadratic(as[i], bs[j])(x))));

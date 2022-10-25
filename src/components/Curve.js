@@ -4,7 +4,7 @@ export  function Curve({xs, ys, guessedYs}) {
     const plot_layout = 
         {
             title: 'Data Plot with approximated origin function',
-            height: 800,
+            height: 1000,
             xaxis: {
                 title: 'x'
             },
@@ -12,12 +12,12 @@ export  function Curve({xs, ys, guessedYs}) {
                 title: 'f(x)'
             },
             showlegend: false,
-            margin: {
+            margin: { // content to frame / space for axis titles
                 l: 50,
                 r: 0,
                 b: 50,
-                t: 100,
-                pad: 0,
+                t: 50,
+                pad: 0, // padding of axis labels
             }
         }
     const scatterData =
@@ -38,5 +38,5 @@ export  function Curve({xs, ys, guessedYs}) {
             marker: {color: 'red'},
             name: 'Approximation',
         }
-    return <Plot data={[scatterData, curveData]} layout={plot_layout} />
+    return <Plot data={[scatterData, curveData]} layout={plot_layout} className="curve"/>
 }

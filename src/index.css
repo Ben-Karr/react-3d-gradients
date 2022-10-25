@@ -6,11 +6,13 @@ body {
 .container {
   display: flex;
   justify-content: space-around;
+  position: relative;
 }
 
 .settings {
-  width: 200px;
-  padding: 10px;
+  width: 14%;
+  height: 100vh;
+  padding: 1%;
   margin-top: 10px;
   box-shadow: 1px 0px 0px 0px rgb(119, 119, 119);
   position: fixed;
@@ -19,9 +21,11 @@ body {
 }
 
 .plots {
-  left: 200px;
+  left: 15%;
   position: relative;
-  widh: calc(100vw - 200px);
+  background: black;
+  display: flex;
+  justify-content: space-between;
 }
 
 .settings h3 {
@@ -44,18 +48,4 @@ body {
 .title {
   font-size: 1.5em;
   fill: #313131;
-}
-
-path {
-  fill: none;
-  stroke: rgb(255, 100, 100);
-  stroke-width: 2px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-.data-points {
-  fill: rgb(100, 100, 255);
-  stroke: black;
-  stroke-width: 0.5;
 }
