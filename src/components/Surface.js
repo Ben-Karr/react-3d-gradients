@@ -1,5 +1,6 @@
 import Plot from 'react-plotly.js'
 import { scaleLinear } from 'd3'
+import { useState } from 'react'
 
 // Use scale gradients to represent the changing magnitude while keeping it on the scale of the surface
 const gradientScale = scaleLinear()
@@ -7,12 +8,19 @@ const gradientScale = scaleLinear()
     .range([0.3, 2]);
 
 export function Surface({a, b, loss, as, bs, ls, gradients}) {
+    const [camera, setCamera] = useState({
+        center: { x: 0, y: 0, z: 0 },
+        eye: { x: 1.2, y: 1.3, z: 1.2 },
+        projection: { type: "perspective" },
+        up: { x: 0, y: 0, z: 1 }
+    });
+
     const plot_layout = 
         {
             title: '3D plot of loss surface with current parameter point and gradient',
             height: 1000,
             scene: {
-                camera: {eye: {x: 2, y: 1.2, z: 1}},
+                camera: camera,
                 xaxis: {
                     title: 'a'
                 },
@@ -81,5 +89,8 @@ export function Surface({a, b, loss, as, bs, ls, gradients}) {
     return <Plot 
         data={[point_trace, surface_trace, gradient_trace]} 
         layout={plot_layout}
+        onRelayout={(figure) => {
+            setCamera(figure["scene.camera"])
+        }}
         />
 }
