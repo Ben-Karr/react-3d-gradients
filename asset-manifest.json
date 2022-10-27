@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-3d-gradients/static/css/main.f8af5672.css",
+    "main.js": "/react-3d-gradients/static/js/main.d13a47d4.js",
+    "index.html": "/react-3d-gradients/index.html",
+    "main.f8af5672.css.map": "/react-3d-gradients/static/css/main.f8af5672.css.map",
+    "main.d13a47d4.js.map": "/react-3d-gradients/static/js/main.d13a47d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f8af5672.css",
+    "static/js/main.d13a47d4.js"
+  ]
+}
