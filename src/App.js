@@ -36,6 +36,7 @@ function App() {
   const [guessedYs, setGuessedYs] = useState(initialGuess); // to plot guessed curve
   const [loss, setLoss] = useState(initialLoss);
   const [gradients, setGradients] = useState(initialGrads);
+  const [alphaExponent, setAlphaExponent] = useState(4);
 
   useEffect(()=>{
     const points = xs.map(x => mk_quadratic(a,b)(x));
@@ -44,13 +45,17 @@ function App() {
     setGradients(calcGrads_mse(a,b,gradientCoeffs));
   }, [a, b])
 
+  function onStep(){
+    const [gradA, gradB] = gradients.map(x => x/Math.pow(10,alphaExponent));
+    console.log(gradA, gradB)
+    setA(prevA => prevA - gradA);
+    setB(prevB => prevB - gradB);
+  }
+
   return (
       <div className="container">
         <aside className="settings">
-          <Settings a={a} setA={setA} b={b} setB={setB} />
-          <p> Change <code>a</code> and <code>b</code> in order to find the quadratic function <code>a*x^2+b*x</code> with the smallest loss for the given data points.</p>
-          <h3>Current MSE:</h3>
-          <p>{Math.round(loss*100, 2)/100}</p>
+          <Settings a={a} setA={setA} b={b} setB={setB} loss={loss} alphaExponent={alphaExponent} setAlphaExponent={setAlphaExponent} gradients={gradients} onStep={onStep}/>
         </aside>
         <div className="plots">
           <Curve xs={xs} ys={ys} guessedYs={guessedYs}/>

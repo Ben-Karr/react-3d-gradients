@@ -12,7 +12,7 @@ export class Surface extends Component {
         super(props);
         this.state = {
             data: [
-                { // won't change so set on init
+                { // won't change so set data on init
                     x: props.as,
                     y: props.bs,
                     z: props.ls,
