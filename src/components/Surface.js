@@ -100,25 +100,30 @@ export class Surface extends Component {
     }
 
     update_data(traces){
-        const { currentAB, loss, gradients, lossTrace} = this.props;
-        const magnitude = Math.sqrt(Math.pow(gradients[0],2)+Math.pow(gradients[1], 2))
+        const { pointAB, loss, gradients, lossTrace} = this.props;
+        const [a,b] = pointAB;
+        const [gradA, gradB] = gradients;
+
+        const magnitude = Math.sqrt(Math.pow(gradA,2)+Math.pow(gradB, 2))
         const scalar = gradientScale(magnitude);
+        const [normalGradA, normalGradB] = gradients.map(x=>x/magnitude);
+
         const new_data = [];
         new_data.push(traces[0]);
         new_data.push({...traces[1], // (a,b)
-            x: [currentAB[0]],
-            y: [currentAB[1]],
+            x: [a],
+            y: [b],
             z: [loss]});
         new_data.push({...traces[2], // gradients at (a,b)
-            x: [currentAB[0], currentAB[0] - scalar*gradients[0]/magnitude],
-            y: [currentAB[1], currentAB[1] - scalar*gradients[1]/magnitude],
+            x: [a, a - scalar*normalGradA],
+            y: [b, b - scalar*normalGradB],
             z: [loss ,loss]});
         new_data.push({...traces[3], // grdients "arrow head" || starts at new point and "goes back" in the direction of the gradient
-            x: [currentAB[0] - (scalar+0.1)*gradients[0]/magnitude ],
-            y: [currentAB[1] - (scalar+0.1)*gradients[1]/magnitude ],
+            x: [a - scalar*normalGradA ],
+            y: [b - scalar*normalGradB ],
             z: [loss],
-            u: [-Math.min(scalar,0.8)*gradients[0]/magnitude],
-            v: [-Math.min(scalar,0.8)*gradients[1]/magnitude],
+            u: [-normalGradA],
+            v: [-normalGradB],
             w: [0],
         });
         new_data.push({...traces[4], // (a,b,loss) trace
