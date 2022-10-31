@@ -22,10 +22,6 @@ body {
 
 .plots {
   left: 15%;
-  position: relative;
-  background: black;
-  display: flex;
-  justify-content: space-between;
 }
 
 .settings h3 {

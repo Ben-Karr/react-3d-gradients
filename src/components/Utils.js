@@ -5,7 +5,8 @@ export function generatePoints(xStart, xEnd, nSteps){
     return range(xStart, xEnd, stepSize);
 }
 
-export function mk_quadratic(a, b) {
+export function mk_quadratic(ab) {
+    const [a,b] = ab;
     return (x) => a*Math.pow(x, 2) + b*x
 }
 
@@ -56,7 +57,8 @@ function gradB_mse(a,b,coeffs){
     return -2/coeffs.m*(coeffs.xy - a*coeffs.x3 - b*coeffs.x2);
 }
 
-export function calcGrads_mse(a, b, coeffs) {
+export function calcGrads_mse(ab, coeffs) {
+    const [a,b] = ab;
     const grad_a = gradA_mse(a,b,coeffs);
     const grad_b = gradB_mse(a,b,coeffs);
     return [grad_a, grad_b];
@@ -67,7 +69,7 @@ export function generateSurface(as, bs, xs, ys){
     for (let j=0; j<bs.length; j++){
         const row = []
         for (let i=0; i<as.length; i++){
-            row.push(mse(ys, xs.map(x => mk_quadratic(as[i], bs[j])(x))));
+            row.push(mse(ys, xs.map(x => mk_quadratic([as[i], bs[j]])(x))));
         }
         ls.push(row)
     }
