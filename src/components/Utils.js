@@ -18,6 +18,28 @@ export function addNoise(x, multScale=1.2, addScale=25) {
     return x * (1+generateNoise(multScale)) + generateNoise(addScale);
 }
 
+// Mean Average Error
+export function mae(targets, preds) {
+    let loss = 0;
+    for (let i=0; i<targets.length; i++){
+        loss += Math.abs(targets[i]-preds[i]);
+    }
+    return loss/targets.length;
+}
+
+export function calcGrads_mae(ab,xs,ys){
+    const [a,b] = ab;
+    let sumA = 0;
+    let sumB = 0;
+    for (let i=0; i<xs.length; i++){
+        let sign = Math.sign(ys[i]-a*Math.pow(xs[i], 2)-b*xs[i]);
+        sumA += -Math.pow(xs[i],2)*sign;
+        sumB += -xs[i]*sign;
+    }
+    return [sumA, sumB];
+}
+
+// Mean Square Error
 export function mse(targets, preds) {
     let loss = 0;
     for (let i=0; i<targets.length; i++){
@@ -64,18 +86,31 @@ export function calcGrads_mse(ab, coeffs) {
     return [grad_a, grad_b];
 }
 
-export function generateSurface(as, bs, xs, ys){
+// Root Mean Square Error
+export function rmse(targets, preds){
+    return Math.sqrt(mse(targets, preds));
+}
+
+export function calcGrads_rmse(ab, xs, ys, coeffs){
+    const [a,b] = ab;
+    let sum = 0;
+    for (let i=0;i<xs.length;i++){
+      sum += Math.pow(ys[i] - a*Math.pow(xs[i],2) - b*xs[i], 2);
+    }
+    return calcGrads_mse(ab,coeffs).map(x => x/(2* Math.sqrt(sum/xs.length)));
+}
+
+export function generateSurface(as, bs, xs, ys, loss){
     const ls = [] // needs to be y-rows \times x-cols (ascending) for Plotly
     for (let j=0; j<bs.length; j++){
         const row = []
         for (let i=0; i<as.length; i++){
-            row.push(mse(ys, xs.map(x => mk_quadratic([as[i], bs[j]])(x))));
+            row.push(loss(ys, xs.map(x => mk_quadratic([as[i], bs[j]])(x))));
         }
         ls.push(row)
     }
     return ls
 }
-
 
 export const debugYs = [
     291.88594759577836,
