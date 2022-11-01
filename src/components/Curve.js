@@ -5,6 +5,7 @@ export  function Curve({xs, ys, guessedYs}) {
         {
             title: 'Data Plot with approximated origin function',
             height: 1000,
+            width: 600,
             xaxis: {
                 title: 'x'
             },

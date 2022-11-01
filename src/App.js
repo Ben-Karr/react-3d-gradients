@@ -76,11 +76,6 @@ function App() {
           />
         </aside>
         <div className="plots">
-          {<Curve 
-            xs={xs} 
-            ys={ys} 
-            guessedYs={guessedYs}
-          />}
           <Surface 
             pointAB={pointAB} 
             loss={loss} 
@@ -89,6 +84,11 @@ function App() {
             ls={ls} 
             gradients={gradients} 
             lossTrace={lossTrace.length > 1 ? lossTrace: []}
+          />
+          <Curve 
+            xs={xs} 
+            ys={ys} 
+            guessedYs={guessedYs}
           />
         </div>
       </div>

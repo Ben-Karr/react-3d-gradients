@@ -6,7 +6,7 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
     return (
         <>
             <h3>Settings:</h3>
-            <div className="sliders">
+            <div className="settings--slide">
                 <b>a:</b> {pointAB[0]}
                 <Slider 
                     onChange={a => {
@@ -51,7 +51,7 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
             <h3>Gradient Stepper:</h3>
             <p>Pick a learning rate and step <code>(a,b)</code> in the direction of the negative gradient (given by gray arrow)</p>
             lr: {Math.round(Math.pow(0.1,lrExponent)*100000, 2)/10000}
-            <div className="slider stepper">
+            <div className="settings--slide stepper">
                 <Slider 
                     onAfterChange={setLrExponent}
                     value={lrExponent}
@@ -70,7 +70,7 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                     }}*/
                 />
             </div>
-            <div className="stepper-buttons">
+            <div className="stepper--buttons">
                 <button onClick={onStep}>Step</button>
                 <button onClick={onClear}>Clear Trace</button>
             </div>

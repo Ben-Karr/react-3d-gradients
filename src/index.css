@@ -12,41 +12,19 @@ body {
 .settings {
   width: 10%;
   height: 100vh;
-  padding: 1%;
-  margin-top: 10px;
+  padding-left: 1%;
+  padding-right: 1%;
   box-shadow: 1px 0px 0px 0px rgb(119, 119, 119);
   position: fixed;
   top: 0;
   left: 0;
 }
 
-.plots {
-  left: 17%;
-}
-
 .settings h3 {
   color: #313131;
 }
 
-.error {
-  background: gray;
-}
-
-.axis line {
-  stroke: #C0C0BB;
-}
-
-.axis text{
-  font-weight: lighter;
-  fill: #696969;
-}
-
-.title {
-  font-size: 1.5em;
-  fill: #313131;
-}
-
-.settings schbutton{
+.settings button{
   width: 100%;
   margin-top: 10px;
   border-radius: 6px;
@@ -66,11 +44,16 @@ body {
   margin-bottom: 10px;
 }
 
-.slider {
+.settings--slide {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-.stepper-buttons {
+.stepper--buttons {
   margin-top: 20px;
+}
+
+.plots {
+  position: absolute;
+  left: 13%;
 }
