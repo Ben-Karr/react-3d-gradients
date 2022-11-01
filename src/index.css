@@ -4,20 +4,19 @@ body {
 }
 
 .container {
-  display: flex;
-  justify-content: space-around;
-  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template: 1fr / 1fr 8fr;
+  gap: 2px;
+  grid-template-areas: 
+  "settings plots";
 }
 
 .settings {
-  width: 10%;
-  height: 100vh;
-  padding-left: 1%;
-  padding-right: 1%;
+  grid-area: settings;
   box-shadow: 1px 0px 0px 0px rgb(119, 119, 119);
-  position: fixed;
-  top: 0;
-  left: 0;
+  padding-inline: 10px;
 }
 
 .settings h3 {
@@ -54,6 +53,5 @@ body {
 }
 
 .plots {
-  position: absolute;
-  left: 13%;
+  grid-template-areas: plots;
 }
