@@ -71,8 +71,7 @@ export class Surface extends Component {
                 }
             ],
             layout: {
-                height: 1000,
-                width: 1000,
+                autosize: true,
                 title: '3D plot of loss surface with current parameter point and gradient',
                 scene: {
                     xaxis: {
@@ -95,7 +94,7 @@ export class Surface extends Component {
                 showlegend: false,       
             },
             frames: [],
-            config: {},
+            config: {responsive: true},
         };
     }
 
@@ -141,6 +140,7 @@ export class Surface extends Component {
                 layout={this.state.layout}
                 frames={this.state.frames}
                 config={this.state.config}
+                className="plots--surface"
             />
         );
     }

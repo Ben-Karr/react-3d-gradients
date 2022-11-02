@@ -3,9 +3,8 @@ import Plot from 'react-plotly.js';
 export  function Curve({xs, ys, guessedYs}) {
     const plot_layout = 
         {
+            autosize: true,
             title: 'Data Plot with approximated origin function',
-            height: 1000,
-            width: 600,
             xaxis: {
                 title: 'x'
             },
@@ -13,7 +12,7 @@ export  function Curve({xs, ys, guessedYs}) {
                 title: 'f(x)'
             },
             showlegend: false,
-            margin: { // content to frame / space for axis titles
+            margin: { // content to frame|space for axis titles
                 l: 50,
                 r: 0,
                 b: 50,
@@ -21,7 +20,7 @@ export  function Curve({xs, ys, guessedYs}) {
                 pad: 0, // padding of axis labels
             }
         }
-    const scatterData =
+    const pointsData =
         {
             x: xs,
             y: ys,
@@ -39,5 +38,5 @@ export  function Curve({xs, ys, guessedYs}) {
             marker: {color: 'red'},
             name: 'Approximation',
         }
-    return <Plot data={[scatterData, curveData]} layout={plot_layout} className="curve"/>
+    return <Plot data={[pointsData, curveData]} layout={plot_layout} config={{responsive: true}} className="plots--curve"/>
 }

@@ -31,13 +31,14 @@ const bs = generatePoints(-4, 8, 30); // y-axis in surface plot
 const ls = generateSurface(as, bs, xs, ys, critics[criticName]['lossFunc']) // height|z-axis in surface plot
 
 function App() {
-  const [pointAB, setPointAB]   = useState(initialAB);
+  const [pointAB, setPointAB]       = useState(initialAB);
   const [guessedYs, setGuessedYs]   = useState(initialGuess); // to plot guessed curve
   const [loss, setLoss]             = useState(initialLoss);
   const [gradients, setGradients]   = useState(initialGrads);
   const [lrExponent, setLrExponent] = useState(4);
   const [lossTrace, setLossTrace]   = useState([[initialAB[0], initialAB[1], initialLoss]]);
   const [addGrads, setAddGrads]     = useState(false);
+  const [showTrace, setShowTrace]   = useState(false);
   
   useEffect(()=>{
     const points = xs.map(x => mk_quadratic(pointAB)(x));
@@ -73,23 +74,29 @@ function App() {
             gradients={gradients}
             onStep={onStep}
             onClear={onClear}
+            showTrace={showTrace}
+            setShowTrace={setShowTrace}
           />
         </aside>
         <div className="plots">
-          <Surface 
-            pointAB={pointAB} 
-            loss={loss} 
-            as={as} 
-            bs={bs} 
-            ls={ls} 
-            gradients={gradients} 
-            lossTrace={lossTrace.length > 1 ? lossTrace: []}
-          />
-          <Curve 
-            xs={xs} 
-            ys={ys} 
-            guessedYs={guessedYs}
-          />
+          <div className="plots--surface-wrapper">
+            <Surface 
+              pointAB={pointAB} 
+              loss={loss} 
+              as={as} 
+              bs={bs} 
+              ls={ls} 
+              gradients={gradients} 
+              lossTrace={(lossTrace.length > 1 && showTrace) ? lossTrace : []}
+            />
+          </div>
+          <div className="plots--curve-wrapper">
+            <Curve 
+              xs={xs} 
+              ys={ys} 
+              guessedYs={guessedYs}
+            />
+          </div>
         </div>
       </div>
   )

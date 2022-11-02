@@ -1,26 +1,49 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: sans-serif;
 }
 
 .container {
   height: 100vh;
-  width: 100vw;
   display: grid;
-  grid-template: 1fr / 1fr 6fr;
+  grid-template-columns: 1fr 7fr;
   gap: 2px;
-  grid-template-areas: 
-  "settings plots";
+  grid-template-areas: "settings plots";
 }
 
 .settings {
   grid-area: settings;
   box-shadow: 1px 0px 0px 0px rgb(119, 119, 119);
   padding-inline: 10px;
+  min-width: 150px;
 }
 
 .settings h3 {
   color: #313131;
+  overflow: scroll;
+}
+
+.settings--slide {
+  margin-inline: 10px;
+}
+
+.settings .rc-slider-dot-active {
+  border: 2px solid #e9e9e9;
+  overflow: scroll;
+}
+
+.settings .rc-slider-horizontal {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.settings--buttons {
+  margin-top: 20px;
+}
+
+.settings--trace {
+  display: flex;
 }
 
 .settings button{
@@ -34,24 +57,30 @@ body {
   color: #313131;
 }
 
-.settings .rc-slider-dot-active {
-  border: 2px solid #e9e9e9;
-}
-
-.settings .rc-slider-horizontal {
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
-.settings--slide {
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-.stepper--buttons {
-  margin-top: 20px;
-}
-
 .plots {
   grid-template-areas: plots;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: scroll;
+}
+
+.plots--surface-wrapper{
+  min-width: 700px;
+  flex: 2;
+}
+
+.plots--curve-wrapper{
+  min-width: 500px;
+  flex: 1;
+}
+
+.plots--surface {
+  width: 90%;
+  min-height: 700px;
+}
+
+.plots--curve {
+  width: 90%;
+  min-height: 700px;
 }
