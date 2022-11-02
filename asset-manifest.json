@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-3d-gradients/static/css/main.1e1d2528.css",
-    "main.js": "/react-3d-gradients/static/js/main.1a9fcc0a.js",
+    "main.css": "/react-3d-gradients/static/css/main.4faf31de.css",
+    "main.js": "/react-3d-gradients/static/js/main.63ba3bd8.js",
     "index.html": "/react-3d-gradients/index.html",
-    "main.1e1d2528.css.map": "/react-3d-gradients/static/css/main.1e1d2528.css.map",
-    "main.1a9fcc0a.js.map": "/react-3d-gradients/static/js/main.1a9fcc0a.js.map"
+    "main.4faf31de.css.map": "/react-3d-gradients/static/css/main.4faf31de.css.map",
+    "main.63ba3bd8.js.map": "/react-3d-gradients/static/js/main.63ba3bd8.js.map"
   },
   "entrypoints": [
-    "static/css/main.1e1d2528.css",
-    "static/js/main.1a9fcc0a.js"
+    "static/css/main.4faf31de.css",
+    "static/js/main.63ba3bd8.js"
   ]
 }
