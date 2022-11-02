@@ -7,7 +7,7 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
         <>
             <h3>Settings:</h3>
             <div className="settings--slide">
-                <b>a:</b> {pointAB[0]}
+                <b>a:</b> {Math.round(pointAB[0]*1000)/1000}
                 <Slider 
                     onChange={a => {
                         setPointAB(prevAB => [a,prevAB[1]]);
@@ -25,7 +25,7 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                     }}
                     railStyle={{ height: 8 }}
                 /> 
-                <b>b:</b> {pointAB[1]}
+                <b>b:</b> {Math.round(pointAB[1]*1000)/1000}
                 <Slider 
                     onChange={b => {
                         setPointAB(prevAB => [prevAB[0], b]);
