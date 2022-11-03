@@ -15,7 +15,6 @@ export class Surface extends Component {
                 { // loss surface | won't change so set data on init
                     x: props.as,
                     y: props.bs,
-                    z: props.ls,
                     type: 'surface',
                     showscale: false,
                     name: 'Loss Surface',
@@ -99,7 +98,7 @@ export class Surface extends Component {
     }
 
     update_data(traces){
-        const { pointAB, loss, gradients, lossTrace} = this.props;
+        const { pointAB, loss, gradients, lossTrace, ls} = this.props;
         const [a,b] = pointAB;
         const [gradA, gradB] = gradients;
 
@@ -108,7 +107,9 @@ export class Surface extends Component {
         const [normalGradA, normalGradB] = gradients.map(x=>x/magnitude);
 
         const new_data = [];
-        new_data.push(traces[0]);
+        new_data.push({...traces[0], 
+            z: ls,
+        });
         new_data.push({...traces[1], // (a,b)
             x: [a],
             y: [b],

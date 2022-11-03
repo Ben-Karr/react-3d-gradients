@@ -17,18 +17,18 @@ const φ = x => 3 * Math.pow(x,2) + 2 * x ;
 const ys = DEBUG ? debugYs : xs.map(x => addNoise(φ(x))); 
 
 const critics = getCritics(xs, ys);
-const criticName = 'mse'
-const critic = critics[criticName]
+const initialCriticName = 'mse'
+const initialCritic = critics[initialCriticName]
 
 // Pre-calc initial values to avoid rerendering of the page
 const initialAB = [1,1];
 const initialGuess = xs.map(x => mk_quadratic(initialAB)(x));
-const initialLoss = critic['lossFunc'](ys, initialGuess);
-const initialGrads = critic['calcGrads'](initialAB)
+const initialLoss = initialCritic['lossFunc'](ys, initialGuess);
+const initialGrads = initialCritic['calcGrads'](initialAB);
 
 const as = generatePoints(-1, 6, 30); // x-axis in surface plot
 const bs = generatePoints(-4, 8, 30); // y-axis in surface plot
-const ls = generateSurface(as, bs, xs, ys, critics[criticName]['lossFunc']) // height|z-axis in surface plot
+const initialLs = generateSurface(as, bs, xs, ys, initialCritic['lossFunc']) // height|z-axis in surface plot
 
 function App() {
   const [pointAB, setPointAB]       = useState(initialAB);
@@ -39,6 +39,9 @@ function App() {
   const [lossTrace, setLossTrace]   = useState([[initialAB[0], initialAB[1], initialLoss]]);
   const [addGrads, setAddGrads]     = useState(false);
   const [showTrace, setShowTrace]   = useState(false);
+  const [criticName, setCriticName] = useState(initialCriticName);
+  const [critic, setCritic]         = useState(initialCritic);
+  const [ls, setLs]                 = useState(initialLs);
   
   useEffect(()=>{
     const points = xs.map(x => mk_quadratic(pointAB)(x));
@@ -50,7 +53,13 @@ function App() {
       setLossTrace(prevTrace => [...prevTrace, [pointAB[0], pointAB[1], newLoss]])
       setAddGrads(false);
     };
-  }, [pointAB, addGrads])
+  }, [pointAB, addGrads, critic])
+
+  useEffect(()=>{
+    const newCritic = critics[criticName];
+    setCritic(newCritic);
+    setLs(generateSurface(as, bs, xs, ys, newCritic['lossFunc']))
+  }, [criticName])
 
   function onStep(){
     const [stepA, stepB] = gradients.map(x => x/Math.pow(10,lrExponent));
@@ -76,6 +85,8 @@ function App() {
             onClear={onClear}
             showTrace={showTrace}
             setShowTrace={setShowTrace}
+            criticName={criticName}
+            setCriticName={setCriticName}
           />
         </aside>
         <div className="plots">

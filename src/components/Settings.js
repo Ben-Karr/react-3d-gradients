@@ -1,9 +1,21 @@
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import Select from 'react-select';
 
-export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent, onStep, onClear, showTrace, setShowTrace }) {
+const options = [
+    {value: 'mae', label: 'Mean Average Error'},
+    {value: 'mse', label: 'Mean Square Error'},
+    {value: 'rmse', label: 'Root Mean Square Error'},
+]
+
+export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent, onStep, onClear, showTrace, setShowTrace, criticName, setCriticName }) {
     function handleChange(){
         setShowTrace(!showTrace);
+    }
+
+    function handleCriticChange(e) {
+        setCriticName(e.value);
+        onClear();
     }
     // subtract a tiny margin (stepsize of a|b grid) to keep all values of the slider inside the surface
     return (
@@ -51,6 +63,11 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
             <p>What does changing (a,b) do?</p>
             <div className="settings--loss">
                 <h4>Current Loss:</h4>
+                <Select 
+                    options={options}
+                    defaultValue={options[1]}
+                    onChange={handleCriticChange}
+                />
                 <p>{Math.round(loss*100, 2)/100}</p>
                 <h3>Gradient Stepper:</h3>
                 <p>Whats does the stepper do?</p>
@@ -66,13 +83,6 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                     reverse
                     step={null}
                     trackStyle={{ backgroundColor: 'transparent', height: 0 }}
-                    /*railStyle={{ height: 10 }}
-                    handleStyle={{
-                        height: 28,
-                        width: 28,
-                        marginLeft: -14,
-                        marginTop: -9,
-                    }}*/
                 />
             </div>
             <div className="settings--buttons">
