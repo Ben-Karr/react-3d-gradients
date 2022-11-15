@@ -55,7 +55,7 @@ export class Surface extends Component {
                     opacity: 1,
                     line: {
                         width: 6,
-                        color: 'steelblue',
+                        color: 'lightslategray',
                     },
                     showscale: false
                 },
@@ -63,15 +63,15 @@ export class Surface extends Component {
                         type: "cone",
                         anchor: "tip",
                         hoverinfo: "none",
-                        colorscale: [[0, "steelblue"], [1, "steelblue"]], // color all cones blue
+                        colorscale: [[0, "lightslategray"], [1, "lightslategray"]], // color all cones blue
                         showscale: false,
                 },
                 { // (a,b,loss) trace | inject data on render
                     type: 'scatter3d',
                     mode: 'lines+markers',
-                    opacity: 0.3,
+                    opacity: 0.2,
                     line: {
-                        width: 5,
+                        width: 2,
                         color: 'black',
                     },
                     marker: {
@@ -80,7 +80,7 @@ export class Surface extends Component {
                         symbol: 'circle',
                         line: {
                             color: 'black',
-                            width: 1,
+                            width: 0.5
                         }
                     }
                 }

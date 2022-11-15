@@ -24,6 +24,12 @@ body {
   overflow: scroll;
 }
 
+.settings--title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .settings--slide {
   margin-inline: 10px;
 }
@@ -42,15 +48,6 @@ body {
   margin-top: 20px;
 }
 
-.settings--trace {
-  display: flex;
-  align-items: center;
-}
-
-.settings--trace label {
-  width: 250px;
-}
-
 .settings button{
   width: 100%;
   margin-top: 10px;
@@ -60,6 +57,12 @@ body {
   font-size: 1.1rem;
   background-color: #abe2fb;
   color: #313131;
+}
+
+.settings--trace {
+  padding: 5px;
+  display: flex;
+  justify-content: right;
 }
 
 .plots {

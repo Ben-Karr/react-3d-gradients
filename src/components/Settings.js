@@ -1,6 +1,7 @@
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Select from 'react-select';
+import HelpSharpIcon from '@mui/icons-material/HelpSharp'
 
 const options = [
     {value: 'mae', label: 'Mean Average Error'},
@@ -20,7 +21,10 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
     // subtract a tiny margin (stepsize of a|b grid) to keep all values of the slider inside the surface
     return (
         <>
-            <h4>Settings:</h4>
+            <div className="settings--title">
+                <h4>Settings:</h4>
+                <HelpSharpIcon color="primary"/>
+            </div>
             <div className="settings--slide">
                 <b>a:</b> {pointAB[0].toFixed(2)}
                 <Slider 
@@ -60,21 +64,25 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                     railStyle={{ height: 10 }}
                 />
             </div>
-            <p>What does changing (a,b) do?</p>
             <div className="settings--loss">
-                <h4>Current Loss:</h4>
+                <div className="settings--title">
+                    <h4>Current Loss:</h4>
+                    <HelpSharpIcon color="primary"/>
+                </div>
                 <Select 
                     options={options}
                     defaultValue={options[1]}
                     onChange={handleCriticChange}
                 />
                 <p>{Math.round(loss*100, 2)/100}</p>
-                <h4>Gradient Stepper:</h4>
-                <p>Whats does the stepper do?</p>
-                <p>Magnitude of gradients vector: {Math.round(magnitude*100)/100}</p>
-                <p>lr: {Math.round(Math.pow(0.1,lrExponent-1)*10000, 2)/10000}</p>
-                <p>Stepsize: {Math.round(Math.pow(0.1,lrExponent-1) * magnitude * 10000)/10000}</p>
             </div>
+            <div className="settings--title">
+                    <h4>Gradient Stepper:</h4>
+                    <HelpSharpIcon color="primary"/>
+            </div>
+            <p>Magnitude of gradients vector: {Math.round(magnitude*100)/100}</p>
+            <p>lr: {Math.round(Math.pow(0.1,lrExponent-1)*10000, 2)/10000}</p>
+            <p>Stepsize: {Math.round(Math.pow(0.1,lrExponent-1) * magnitude * 10000)/10000}</p>
             <div className="settings--slide stepper">
                 <Slider 
                     onAfterChange={setLrExponent}
@@ -89,12 +97,10 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
             </div>
             <div className="settings--buttons">
                 <button onClick={onStep}>Step</button>
+                <button onClick={onClear}>Clear Trace</button>
                 <div className="settings--trace">
-                    <label>
-                        <input type="checkbox" value={showTrace} onChange={handleChange}/>
-                        Hide Trace
-                    </label>
-                    <button onClick={onClear}>Clear Trace</button>
+                    <input id="trace" type="checkbox" value={showTrace} onChange={handleChange}/>
+                    <label for="trace">Hide Trace</label>
                 </div>
             </div>
             </>
