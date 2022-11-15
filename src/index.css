@@ -9,46 +9,41 @@ body {
   display: grid;
   grid-template-columns: 1fr 7fr;
   gap: 2px;
-  grid-template-areas: "settings plots";
+  grid-template-areas: "sidebar plots";
 }
 
-.settings {
-  grid-area: settings;
+.sidebar {
+  grid-area: sidebar;
   box-shadow: 1px 0px 0px 0px rgb(119, 119, 119);
   padding-inline: 10px;
   min-width: 150px;
 }
 
-.settings h3 {
+.sidebar h3 {
   color: #313131;
-  overflow: scroll;
 }
 
-.settings--title {
+.sidebar--title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.settings--slide {
-  margin-inline: 10px;
-}
-
-.settings .rc-slider-dot-active {
+.sidebar .rc-slider-dot-active {
   border: 2px solid #e9e9e9;
   overflow: scroll;
 }
 
-.settings .rc-slider-horizontal {
+.sidebar .rc-slider-horizontal {
   margin-top: 5px;
   margin-bottom: 10px;
 }
 
-.settings--buttons {
+.sidebar--buttons {
   margin-top: 20px;
 }
 
-.settings button{
+.sidebar button{
   width: 100%;
   margin-top: 10px;
   border-radius: 6px;
@@ -59,7 +54,7 @@ body {
   color: #313131;
 }
 
-.settings--trace {
+.sidebar--trace {
   padding: 5px;
   display: flex;
   justify-content: right;
@@ -91,8 +86,4 @@ body {
 .plots--curve {
   width: 90%;
   min-height: 700px;
-}
-
-math {
-  math-style: compact;
 }

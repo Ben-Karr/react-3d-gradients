@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { generatePoints, addNoise, mk_quadratic, generateSurface, debugYs, norm} from './components/Utils'
 import { getCritics } from './components/Critics'
-import { Settings } from './components/Settings'
+import { Sidebar } from './components/Sidebar'
 import { Curve } from './components/Curve'
 import { Surface } from './components/Surface'
 
@@ -78,8 +78,8 @@ function App() {
 
   return (
       <div className="container">
-        <aside className="settings">
-          <Settings 
+        <aside className="sidebar">
+          <Sidebar 
             pointAB={pointAB}
             setPointAB={setPointAB}
             loss={loss}

@@ -2,14 +2,17 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Select from 'react-select';
 import HelpSharpIcon from '@mui/icons-material/HelpSharp'
+import Tooltip from '@mui/material/Tooltip';
 
 const options = [
     {value: 'mae', label: 'Mean Average Error'},
     {value: 'mse', label: 'Mean Square Error'},
     {value: 'rmse', label: 'Root Mean Square Error'},
-]
+];
 
-export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent, onStep, onClear, showTrace, setShowTrace, setCriticName, magnitude }) {
+const tooltipInfo = "click for more info";
+
+export function Sidebar({ pointAB, setPointAB, loss , lrExponent, setLrExponent, onStep, onClear, showTrace, setShowTrace, setCriticName, magnitude }) {
     function handleChange(){
         setShowTrace(!showTrace);
     }
@@ -21,13 +24,17 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
     // subtract a tiny margin (stepsize of a|b grid) to keep all values of the slider inside the surface
     return (
         <>
-            <div className="settings--title">
+
+            <div className="sidebar--title">
                 <h4>Settings:</h4>
-                <HelpSharpIcon color="primary"/>
+                <Tooltip title={tooltipInfo}>
+                    <HelpSharpIcon color="primary"/>
+                </Tooltip>
             </div>
-            <div className="settings--slide">
+            <div className="sidebar--point">
                 <b>a:</b> {pointAB[0].toFixed(2)}
                 <Slider 
+
                     onChange={a => {
                         setPointAB(prevAB => [Math.round(a*1000)/1000,prevAB[1]]);
                         onClear();
@@ -43,7 +50,7 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                         marginTop: -9,
                     }}
                     railStyle={{ height: 8 }}
-                /> 
+                    /> 
                 <b>b:</b> {pointAB[1].toFixed(2)}
                 <Slider 
                     onChange={b => {
@@ -62,13 +69,15 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                         marginTop: -9,
                     }}
                     railStyle={{ height: 10 }}
-                />
+                    />
             </div>
-            <div className="settings--loss">
-                <div className="settings--title">
-                    <h4>Current Loss:</h4>
+            <div className="sidebar--title">
+                <h4>Current Loss:</h4>
+                <Tooltip title={tooltipInfo}>
                     <HelpSharpIcon color="primary"/>
-                </div>
+                </Tooltip>
+            </div>
+            <div className="sidebar--loss">
                 <Select 
                     options={options}
                     defaultValue={options[1]}
@@ -76,14 +85,18 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                 />
                 <p>{Math.round(loss*100, 2)/100}</p>
             </div>
-            <div className="settings--title">
-                    <h4>Gradient Stepper:</h4>
+            <div className="sidebar--title">
+                <h4>Gradient Stepper:</h4>
+                <Tooltip title={tooltipInfo}>
                     <HelpSharpIcon color="primary"/>
+                </Tooltip>
             </div>
-            <p>Magnitude of gradients vector: {Math.round(magnitude*100)/100}</p>
-            <p>lr: {Math.round(Math.pow(0.1,lrExponent-1)*10000, 2)/10000}</p>
-            <p>Stepsize: {Math.round(Math.pow(0.1,lrExponent-1) * magnitude * 10000)/10000}</p>
-            <div className="settings--slide stepper">
+            <div className="sidebar--stepper">
+                <div>
+                    <b>Magnitude</b> of gradients vector: {Math.round(magnitude*100)/100}<br/>
+                    <b>lr</b>: {Math.round(Math.pow(0.1,lrExponent-1)*10000, 2)/10000}<br/>
+                    <b>Stepsize</b>: {Math.round(Math.pow(0.1,lrExponent-1) * magnitude * 10000)/10000}
+                </div>
                 <Slider 
                     onAfterChange={setLrExponent}
                     value={lrExponent}
@@ -93,16 +106,16 @@ export function Settings({ pointAB, setPointAB, loss , lrExponent, setLrExponent
                     reverse
                     step={null}
                     trackStyle={{ backgroundColor: 'transparent', height: 0 }}
-                />
-            </div>
-            <div className="settings--buttons">
-                <button onClick={onStep}>Step</button>
-                <button onClick={onClear}>Clear Trace</button>
-                <div className="settings--trace">
-                    <input id="trace" type="checkbox" value={showTrace} onChange={handleChange}/>
-                    <label for="trace">Hide Trace</label>
+                    />
+                <div className="sidebar--buttons">
+                    <button onClick={onStep}>Step</button>
+                    <button onClick={onClear}>Clear Trace</button>
+                    <div className="sidebar--trace">
+                        <input id="trace" type="checkbox" value={showTrace} onChange={handleChange}/>
+                        <label for="trace">Hide Trace</label>
+                    </div>
                 </div>
             </div>
-            </>
+        </>
     )
 }
