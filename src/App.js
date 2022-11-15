@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { generatePoints, addNoise, mk_quadratic, generateSurface, debugYs} from './components/Utils'
+import { generatePoints, addNoise, mk_quadratic, generateSurface, debugYs, norm} from './components/Utils'
 import { getCritics } from './components/Critics'
 import { Settings } from './components/Settings'
 import { Curve } from './components/Curve'
@@ -25,10 +25,12 @@ const initialAB = [1,1];
 const initialGuess = xs.map(x => mk_quadratic(initialAB)(x));
 const initialLoss = initialCritic['lossFunc'](ys, initialGuess);
 const initialGrads = initialCritic['calcGrads'](initialAB);
+const initialMagnitude = norm(initialGrads);
 
 const as = generatePoints(-1, 6, 30); // x-axis in surface plot
 const bs = generatePoints(-4, 8, 30); // y-axis in surface plot
 const initialLs = generateSurface(as, bs, xs, ys, initialCritic['lossFunc']) // height|z-axis in surface plot
+
 
 function App() {
   const [pointAB, setPointAB]       = useState(initialAB);
@@ -38,21 +40,24 @@ function App() {
   const [lrExponent, setLrExponent] = useState(4);
   const [lossTrace, setLossTrace]   = useState([[initialAB[0], initialAB[1], initialLoss]]);
   const [addGrads, setAddGrads]     = useState(false);
-  const [showTrace, setShowTrace]   = useState(false);
+  const [showTrace, setShowTrace]   = useState(true);
   const [criticName, setCriticName] = useState(initialCriticName);
   const [critic, setCritic]         = useState(initialCritic);
   const [ls, setLs]                 = useState(initialLs);
+  const [magnitude,setMagnitude]    = useState(initialMagnitude)
   
   useEffect(()=>{
     const points = xs.map(x => mk_quadratic(pointAB)(x));
     const newLoss = critic['lossFunc'](ys, points);
+    const newGrads = critic['calcGrads'](pointAB);
     setGuessedYs(points);
     setLoss(newLoss);
-    setGradients(critic['calcGrads'](pointAB));
+    setGradients(newGrads);
     if (addGrads) {
       setLossTrace(prevTrace => [...prevTrace, [pointAB[0], pointAB[1], newLoss]])
       setAddGrads(false);
     };
+    setMagnitude(norm(newGrads));
   }, [pointAB, addGrads, critic])
 
   useEffect(()=>{
@@ -62,7 +67,7 @@ function App() {
   }, [criticName])
 
   function onStep(){
-    const [stepA, stepB] = gradients.map(x => x/Math.pow(10,lrExponent));
+    const [stepA, stepB] = gradients.map(x => x/Math.pow(10,lrExponent-1));
     setPointAB(prevAB => [prevAB[0] - stepA, prevAB[1] - stepB]);
     setAddGrads(true);
   }
@@ -87,6 +92,7 @@ function App() {
             setShowTrace={setShowTrace}
             criticName={criticName}
             setCriticName={setCriticName}
+            magnitude={magnitude}
           />
         </aside>
         <div className="plots">
@@ -99,12 +105,15 @@ function App() {
               ls={ls} 
               gradients={gradients} 
               lossTrace={(lossTrace.length > 1 && showTrace) ? lossTrace : []}
+              magnitude={magnitude}
+              criticName={criticName}
             />
           </div>
           <div className="plots--curve-wrapper">
             <Curve 
               xs={xs} 
-              ys={ys} 
+              ys={ys}
+              pointAB={pointAB}
               guessedYs={guessedYs}
             />
           </div>

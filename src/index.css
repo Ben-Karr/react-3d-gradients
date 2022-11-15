@@ -44,6 +44,11 @@ body {
 
 .settings--trace {
   display: flex;
+  align-items: center;
+}
+
+.settings--trace label {
+  width: 250px;
 }
 
 .settings button{
@@ -83,4 +88,8 @@ body {
 .plots--curve {
   width: 90%;
   min-height: 700px;
+}
+
+math {
+  math-style: compact;
 }

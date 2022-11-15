@@ -2,10 +2,8 @@ import Plot from 'react-plotly.js'
 import { scaleLinear } from 'd3'
 import { Component } from 'react'
 
-// Use scaled gradients to represent the changing magnitude while keeping it "in the picture"
-const gradientScale = scaleLinear()
-    .domain([0, 16000])
-    .range([0.3, 2]);
+const magnitudeMins = {'mae': 27, 'mse': 90,'rmse': 2}
+const magnitudeMaxs = {'mae': 3300, 'mse': 16000, 'rmse': 43}
 
 export class Surface extends Component {
     constructor(props) {
@@ -19,6 +17,24 @@ export class Surface extends Component {
                     showscale: false,
                     name: 'Loss Surface',
                     opacity: 0.7,
+                    hovertemplate: "a: %{x:.2f} b: %{y:.2f}<br>loss: %{z:,.2f} <extra></extra>",
+                    contours: {
+                        x: {
+                            highlight: false,
+                            show: false,
+                            size: 0,
+                        },
+                        y: {
+                            highlight: false,
+                            show: false,
+                            size: 0,
+                        },
+                        z: {
+                            highlight: false,
+                            show: false,
+                            size: 0,
+                        },
+                    },
                     colorscale: 'Picnic',
                 },
                 { // current point (a,b) | inject data on render
@@ -39,7 +55,7 @@ export class Surface extends Component {
                     opacity: 1,
                     line: {
                         width: 6,
-                        color: 'darkgray',
+                        color: 'steelblue',
                     },
                     showscale: false
                 },
@@ -47,13 +63,13 @@ export class Surface extends Component {
                         type: "cone",
                         anchor: "tip",
                         hoverinfo: "none",
-                        colorscale: [[0, "darkgray"], [1, "darkgray"]], // color all cones blue
+                        colorscale: [[0, "steelblue"], [1, "steelblue"]], // color all cones blue
                         showscale: false,
                 },
                 { // (a,b,loss) trace | inject data on render
                     type: 'scatter3d',
                     mode: 'lines+markers',
-                    opacity: 0.1,
+                    opacity: 0.3,
                     line: {
                         width: 5,
                         color: 'black',
@@ -71,7 +87,7 @@ export class Surface extends Component {
             ],
             layout: {
                 autosize: true,
-                title: '3D plot of loss surface with current parameter point and gradient',
+                title: 'Loss surface',
                 scene: {
                     xaxis: {
                         title: 'a'
@@ -98,11 +114,13 @@ export class Surface extends Component {
     }
 
     update_data(traces){
-        const { pointAB, loss, gradients, lossTrace, ls} = this.props;
+        const { pointAB, loss, gradients, lossTrace, ls, magnitude, criticName} = this.props;
         const [a,b] = pointAB;
-        const [gradA, gradB] = gradients;
 
-        const magnitude = Math.sqrt(Math.pow(gradA,2)+Math.pow(gradB, 2))
+        // Use scaled gradients to represent the changing magnitude while keeping it "in the picture"
+        const gradientScale = scaleLinear()
+            .domain([magnitudeMins[criticName], magnitudeMaxs[criticName]])
+            .range([0.5 , 2]);
         const scalar = gradientScale(magnitude);
         const [normalGradA, normalGradB] = gradients.map(x=>x/magnitude);
 
@@ -115,15 +133,15 @@ export class Surface extends Component {
             y: [b],
             z: [loss]});
         new_data.push({...traces[2], // gradients at (a,b)
-            x: [a, a - scalar*normalGradA],
-            y: [b, b - scalar*normalGradB],
+            x: [a, a - scalar*0.95*normalGradA],
+            y: [b, b - scalar*0.95*normalGradB],
             z: [loss ,loss]});
-        new_data.push({...traces[3], // grdients "arrow head" || starts at new point and "goes back" in the direction of the gradient
+        new_data.push({...traces[3], // gradients "arrow head" || starts at new point and "goes back" in the direction of the gradient
             x: [a - scalar*normalGradA ],
             y: [b - scalar*normalGradB ],
             z: [loss],
-            u: [-normalGradA],
-            v: [-normalGradB],
+            u: [-scalar/2*normalGradA],
+            v: [-scalar/2*normalGradB],
             w: [0],
         });
         new_data.push({...traces[4], // (a,b,loss) trace

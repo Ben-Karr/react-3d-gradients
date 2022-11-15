@@ -1,17 +1,22 @@
 import Plot from 'react-plotly.js';
 
-export  function Curve({xs, ys, guessedYs}) {
+export  function Curve({xs, ys, pointAB, guessedYs}) {
     const plot_layout = 
         {
             autosize: true,
-            title: 'Data Plot with approximated origin function',
+            title: 'Data Points with approximation f',
             xaxis: {
                 title: 'x'
             },
             yaxis: {
-                title: 'f(x)'
+                title: `f(x)=${pointAB[0].toFixed(2)}·x<sup>2</sup> + ${pointAB[1].toFixed(2)}·x`,
             },
-            showlegend: false,
+            showlegend: true,
+            legend: {
+                x: 0,
+                y: 1,
+                xanchor: 'left',
+            },
             margin: { // content to frame|space for axis titles
                 l: 50,
                 r: 0,
@@ -36,7 +41,7 @@ export  function Curve({xs, ys, guessedYs}) {
             type: 'scatter',
             mode: 'lines',
             marker: {color: 'red'},
-            name: 'Approximation',
+            name: 'f',
         }
     return <Plot data={[pointsData, curveData]} layout={plot_layout} config={{responsive: true}} className="plots--curve"/>
 }

@@ -30,6 +30,10 @@ export function generateSurface(as, bs, xs, ys, loss){
     return ls
 }
 
+export function norm(point) {
+    return Math.sqrt(Math.pow(point[0],2)+Math.pow(point[1], 2))
+}
+
 export const debugYs = [
     291.88594759577836,
     272.26077785428146,
