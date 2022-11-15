@@ -36,16 +36,27 @@ export function Sidebar({ pointAB, setPointAB, loss , lrExponent, setLrExponent,
                     aria-label="Default"
                     valueLabelDisplay="auto"
                     min={-1.}
-                    max={6.}
+                    max={6.-0.25}
                     step={0.01}
                     value={pointAB[0]}
                     onChange={(e,v) => {
-                        console.log(v)
                         setPointAB(prevAB => [Math.round(v*1000)/1000,prevAB[1]]);
                         onClear();
                     }}
                     />
                 <b>b:</b> {pointAB[1].toFixed(2)}
+                <Slider
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+                    min={-4.}
+                    max={7.}
+                    step={0.01}
+                    value={pointAB[1]}
+                    onChange={(e,v) => {
+                        setPointAB(prevAB => [prevAB[0], Math.round(v*1000)/1000]);
+                        onClear();
+                    }}
+                    />
             </div>
             <div className="sidebar--title">
                 <h4>Current Loss:</h4>
