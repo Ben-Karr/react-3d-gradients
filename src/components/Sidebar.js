@@ -1,8 +1,7 @@
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import Select from 'react-select';
 import HelpSharpIcon from '@mui/icons-material/HelpSharp'
 import Tooltip from '@mui/material/Tooltip';
+import Slider from '@mui/material/Slider';
 
 const options = [
     {value: 'mae', label: 'Mean Average Error'},
@@ -33,43 +32,20 @@ export function Sidebar({ pointAB, setPointAB, loss , lrExponent, setLrExponent,
             </div>
             <div className="sidebar--point">
                 <b>a:</b> {pointAB[0].toFixed(2)}
-                <Slider 
-
-                    onChange={a => {
-                        setPointAB(prevAB => [Math.round(a*1000)/1000,prevAB[1]]);
+                <Slider
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+                    min={-1.}
+                    max={6.}
+                    step={0.01}
+                    value={pointAB[0]}
+                    onChange={(e,v) => {
+                        console.log(v)
+                        setPointAB(prevAB => [Math.round(v*1000)/1000,prevAB[1]]);
                         onClear();
                     }}
-                    min={-1} 
-                    max={6-0.33333} 
-                    value={pointAB[0]} 
-                    step={0.01}
-                    trackStyle={{ height: 8 }}
-                    handleStyle={{
-                        height: 28,
-                        width: 28,
-                        marginTop: -9,
-                    }}
-                    railStyle={{ height: 8 }}
-                    /> 
-                <b>b:</b> {pointAB[1].toFixed(2)}
-                <Slider 
-                    onChange={b => {
-                        setPointAB(prevAB => [Math.round(prevAB[0]*1000)/1000, b]);
-                        onClear();
-                    }}
-                    min={-4} 
-                    max={8-0.4} 
-                    value={pointAB[1]} 
-                    step={0.01}
-                    trackStyle={{ height: 10 }}
-                    handleStyle={{
-                        height: 28,
-                        width: 28,
-                        marginLeft: -14,
-                        marginTop: -9,
-                    }}
-                    railStyle={{ height: 10 }}
                     />
+                <b>b:</b> {pointAB[1].toFixed(2)}
             </div>
             <div className="sidebar--title">
                 <h4>Current Loss:</h4>
@@ -97,22 +73,12 @@ export function Sidebar({ pointAB, setPointAB, loss , lrExponent, setLrExponent,
                     <b>lr</b>: {Math.round(Math.pow(0.1,lrExponent-1)*10000, 2)/10000}<br/>
                     <b>Stepsize</b>: {Math.round(Math.pow(0.1,lrExponent-1) * magnitude * 10000)/10000}
                 </div>
-                <Slider 
-                    onAfterChange={setLrExponent}
-                    value={lrExponent}
-                    min={1.9}
-                    max={6}
-                    marks={{2: '1E-2', 3: '1E-3', 4: '1E-4', 5: '1E-5', 6: '1E-6'}}
-                    reverse
-                    step={null}
-                    trackStyle={{ backgroundColor: 'transparent', height: 0 }}
-                    />
                 <div className="sidebar--buttons">
                     <button onClick={onStep}>Step</button>
                     <button onClick={onClear}>Clear Trace</button>
                     <div className="sidebar--trace">
                         <input id="trace" type="checkbox" value={showTrace} onChange={handleChange}/>
-                        <label for="trace">Hide Trace</label>
+                        <label htmlFor="trace">Hide Trace</label>
                     </div>
                 </div>
             </div>
