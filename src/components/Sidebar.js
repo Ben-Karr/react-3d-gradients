@@ -25,7 +25,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
     return (
         <>
             <div className="sidebar--container">
-                <div className="sidebar--point panel">
+                <div className="sidebar--point">
                     <div className="sidebar--title">
                         <h4>Settings:</h4>
                         <Tooltip title={tooltipInfo}>
