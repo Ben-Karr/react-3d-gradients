@@ -34,17 +34,18 @@ const initialLs = generateSurface(as, bs, xs, ys, initialCritic['lossFunc']) // 
 
 function App() {
   const [pointAB, setPointAB]       = useState(initialAB);
-  const [guessedYs, setGuessedYs]   = useState(initialGuess); // to plot guessed curve
+  const [guessedYs, setGuessedYs]   = useState(initialGuess);
   const [loss, setLoss]             = useState(initialLoss);
   const [gradients, setGradients]   = useState(initialGrads);
   const [lr, setLr]                 = useState(1E-4);
   const [lossTrace, setLossTrace]   = useState([[initialAB[0], initialAB[1], initialLoss]]);
-  const [addGrads, setAddGrads]     = useState(false);
+  const [addTrace, setAddTrace]       = useState(false);
   const [showTrace, setShowTrace]   = useState(true);
   const [criticName, setCriticName] = useState(initialCriticName);
   const [critic, setCritic]         = useState(initialCritic);
   const [ls, setLs]                 = useState(initialLs);
-  const [magnitude,setMagnitude]    = useState(initialMagnitude)
+  const [magnitude,setMagnitude]    = useState(initialMagnitude);
+  const [clearTrace, setClearTrace] = useState(false);
   
   useEffect(()=>{
     const points = xs.map(x => mk_quadratic(pointAB)(x));
@@ -53,12 +54,17 @@ function App() {
     setGuessedYs(points);
     setLoss(newLoss);
     setGradients(newGrads);
-    if (addGrads) {
-      setLossTrace(prevTrace => [...prevTrace, [pointAB[0], pointAB[1], newLoss]])
-      setAddGrads(false);
+    if (addTrace) {
+      console.log('on step change effect: ', [...pointAB,newLoss]);
+      setLossTrace(prevTrace => [...prevTrace, [...pointAB, newLoss]])
+      setAddTrace(false);
     };
+    if (clearTrace) {
+      setLossTrace([[...pointAB,newLoss]]);
+      setClearTrace(false);
+    }
     setMagnitude(norm(newGrads));
-  }, [pointAB, addGrads, critic])
+  }, [pointAB, addTrace, critic, clearTrace]);
 
   useEffect(()=>{
     const newCritic = critics[criticName];
@@ -69,12 +75,14 @@ function App() {
   function onStep(){
     const [stepA, stepB] = gradients.map(x => lr*x);
     setPointAB(prevAB => [prevAB[0] - stepA, prevAB[1] - stepB]);
-    setAddGrads(true);
+    setAddTrace(true);
   }
 
   function onClear(){
-    setLossTrace([[pointAB[0], pointAB[1], loss]]);
+    setClearTrace(true);
   }
+
+  console.log(lossTrace[0][2]);
 
   return (
       <div className="container">

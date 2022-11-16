@@ -12,54 +12,6 @@ body {
   grid-template-areas: "sidebar plots";
 }
 
-.sidebar {
-  grid-area: sidebar;
-  box-shadow: 1px 0px 0px 0px rgb(119, 119, 119);
-  padding-inline: 10px;
-  min-width: 150px;
-}
-
-.sidebar h3 {
-  color: #313131;
-}
-
-.sidebar--title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.sidebar--point {
-  display: flex;
-  flex-flow: column;
-}
-
-.slider {
-  align-self: center;
-  width: 90%;
-}
-
-.sidebar--buttons {
-  margin-top: 20px;
-}
-
-.sidebar button{
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  font-size: 1.1rem;
-  background-color: #abe2fb;
-  color: #313131;
-}
-
-.sidebar--trace {
-  padding: 5px;
-  display: flex;
-  justify-content: right;
-}
-
 .plots {
   grid-template-areas: plots;
   display: flex;
@@ -86,21 +38,4 @@ body {
 .plots--curve {
   width: 90%;
   min-height: 700px;
-}
-
-p,
-label {
-  font: 1rem 'Fira Sans', sans-serif;
-}
-
-input {
-  margin: .4rem;
-}
-
-.MuiRadio-root {
-  padding: 0px !important;
-}
-
-.MuiFormGroup-root {
-  padding-inline: 10px !important;
 }

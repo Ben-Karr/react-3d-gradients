@@ -3,7 +3,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio'
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-export function RadioSelecter({lr, setLr}) {
+export function RadioSelector({lr, setLr}) {
   return (
     <RadioGroup value={lr} onChange={e=>{setLr(e.target.value)}} row>
       <FormControlLabel value={1E-1} control={<Radio size='small'/>} label="1E-1"/>

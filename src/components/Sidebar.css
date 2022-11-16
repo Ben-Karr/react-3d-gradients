@@ -1,0 +1,59 @@
+.sidebar {
+    grid-area: sidebar;
+    padding-inline: 10px;
+    min-width: 150px;
+    border-right: solid 1px #313131;
+  }
+  
+  .sidebar h3 {
+    color: #313131;
+  }
+  
+  .sidebar--title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .sidebar--point {
+    display: flex;
+    flex-flow: column;
+  }
+  
+  .slider {
+    align-self: center;
+    width: 90%;
+  }
+  
+  .sidebar--buttons {
+    margin-top: 20px;
+  }
+  
+  .sidebar button{
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 9px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    background-color:   #1976d2;
+    color: whitesmoke;
+  }
+  
+  .sidebar--trace {
+    padding: 5px;
+    display: flex;
+    justify-content: right;
+  }
+  
+  .MuiRadio-root {
+    padding: 0px !important;
+  }
+  
+  .MuiFormGroup-root {
+    justify-content: center;
+  }
+  
+  .MuiFormControlLabel-root {
+    padding-inline: 3px ;
+  }

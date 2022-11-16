@@ -2,7 +2,8 @@ import Select from 'react-select';
 import HelpSharpIcon from '@mui/icons-material/HelpSharp'
 import Tooltip from '@mui/material/Tooltip';
 import Slider from '@mui/material/Slider';
-import { RadioSelecter } from './RadioSelecter'
+import { RadioSelector } from './RadioSelector'
+import './Sidebar.css';
 
 const options = [
     {value: 'mae', label: 'Mean Average Error'},
@@ -21,28 +22,26 @@ export function Sidebar({ pointAB, setPointAB, loss , lr, setLr, onStep, onClear
         setCriticName(e.value);
         onClear();
     }
-    // subtract a tiny margin (stepsize of a|b grid) to keep all values of the slider inside the surface
     return (
         <>
-
-            <div className="sidebar--title">
-                <h4>Settings:</h4>
-                <Tooltip title={tooltipInfo}>
-                    <HelpSharpIcon color="primary"/>
-                </Tooltip>
-            </div>
-            <div className="sidebar--point">
+            <div className="sidebar--point panel">
+                <div className="sidebar--title">
+                    <h4>Settings:</h4>
+                    <Tooltip title={tooltipInfo}>
+                        <HelpSharpIcon color="primary"/>
+                    </Tooltip>
+                </div>
                 <span><b>a:</b> {pointAB[0].toFixed(2)}</span>
                 <div className="slider">
                     <Slider
                         min={-1.}
-                        max={6.-0.23}
+                        max={6.-0.23} // subtract a tiny margin (stepsize of a|b grid) to keep all values of the slider inside the surface
                         step={0.01}
                         value={pointAB[0]}
                         onChange={(e,v) => {
+                            onClear();
                             setPointAB(prevAB => [Math.round(v*1000)/1000,prevAB[1]]);
                         }}
-                        onChangeCommitted={e=>{onClear()}}
                         />
                 </div>
                 <span><b>b:</b> {pointAB[1].toFixed(2)}</span>
@@ -53,8 +52,8 @@ export function Sidebar({ pointAB, setPointAB, loss , lr, setLr, onStep, onClear
                         step={0.01}
                         value={pointAB[1]}
                         onChange={(e,v) => {
-                            setPointAB(prevAB => [prevAB[0], Math.round(v*1000)/1000]);
                             onClear();
+                            setPointAB(prevAB => [prevAB[0], Math.round(v*1000)/1000]);
                         }}
                         />
                 </div>
@@ -82,7 +81,7 @@ export function Sidebar({ pointAB, setPointAB, loss , lr, setLr, onStep, onClear
             <div className="sidebar--stepper">
                 <div>
                     <i>Learning Rate:</i>
-                    <RadioSelecter lr={lr} setLr={setLr}/>
+                    <RadioSelector lr={lr} setLr={setLr}/>
                     <i>Gradients Magnitude</i>: {magnitude.toFixed(2)}<br/>
                     <i>Stepsize</i>: {(lr * magnitude).toFixed(3)}
                 </div>
