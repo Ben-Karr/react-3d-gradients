@@ -29,14 +29,14 @@ body {
   justify-content: space-between;
 }
 
-.sidebar .rc-slider-dot-active {
-  border: 2px solid #e9e9e9;
-  overflow: scroll;
+.sidebar--point {
+  display: flex;
+  flex-flow: column;
 }
 
-.sidebar .rc-slider-horizontal {
-  margin-top: 5px;
-  margin-bottom: 10px;
+.slider {
+  align-self: center;
+  width: 90%;
 }
 
 .sidebar--buttons {
@@ -86,4 +86,21 @@ body {
 .plots--curve {
   width: 90%;
   min-height: 700px;
+}
+
+p,
+label {
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+  margin: .4rem;
+}
+
+.MuiRadio-root {
+  padding: 0px !important;
+}
+
+.MuiFormGroup-root {
+  padding-inline: 10px !important;
 }

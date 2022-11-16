@@ -37,7 +37,7 @@ function App() {
   const [guessedYs, setGuessedYs]   = useState(initialGuess); // to plot guessed curve
   const [loss, setLoss]             = useState(initialLoss);
   const [gradients, setGradients]   = useState(initialGrads);
-  const [lrExponent, setLrExponent] = useState(4);
+  const [lr, setLr]                 = useState(1E-4);
   const [lossTrace, setLossTrace]   = useState([[initialAB[0], initialAB[1], initialLoss]]);
   const [addGrads, setAddGrads]     = useState(false);
   const [showTrace, setShowTrace]   = useState(true);
@@ -67,7 +67,7 @@ function App() {
   }, [criticName])
 
   function onStep(){
-    const [stepA, stepB] = gradients.map(x => x/Math.pow(10,lrExponent-1));
+    const [stepA, stepB] = gradients.map(x => lr*x);
     setPointAB(prevAB => [prevAB[0] - stepA, prevAB[1] - stepB]);
     setAddGrads(true);
   }
@@ -83,8 +83,8 @@ function App() {
             pointAB={pointAB}
             setPointAB={setPointAB}
             loss={loss}
-            lrExponent={lrExponent}
-            setLrExponent={setLrExponent}
+            lr={lr}
+            setLr={setLr}
             gradients={gradients}
             onStep={onStep}
             onClear={onClear}
