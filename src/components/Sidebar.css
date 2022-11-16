@@ -3,6 +3,9 @@
     padding-inline: 10px;
     min-width: 150px;
     border-right: solid 1px #313131;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
   }
   
   .sidebar h3 {
@@ -56,4 +59,11 @@
   
   .MuiFormControlLabel-root {
     padding-inline: 3px ;
+  }
+
+  .sidebar--footer{
+    font-size: x-small;
+    font-style: italic;
+    padding-bottom: 10px;
+    text-align: center;
   }

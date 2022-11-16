@@ -82,8 +82,6 @@ function App() {
     setClearTrace(true);
   }
 
-  console.log(lossTrace[0][2]);
-
   return (
       <div className="container">
         <aside className="sidebar">
