@@ -105,8 +105,8 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                         <i>Stepsize</i>: {(lr * magnitude).toFixed(3)}
                     </div>
                     <div className="sidebar--buttons">
-                        <button onClick={onStep}>Step</button>
-                        <button onClick={onClear}>Clear Trace</button>
+                        <button className="button-step" onClick={onStep}>Step</button>
+                        <button className="button-clear" onClick={onClear}>Clear Trace</button>
                         <div className="sidebar--trace">
                             <input id="trace" type="checkbox" value={showTrace} onChange={handleChange} />
                             <label htmlFor="trace">Hide Trace</label>
