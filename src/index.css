@@ -8,7 +8,7 @@ body {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 7fr;
-  gap: 2px;
+  gap: 5px;
   grid-template-areas: "sidebar plots";
 }
 
