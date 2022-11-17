@@ -1,10 +1,11 @@
 import Select from 'react-select';
-import HelpSharpIcon from '@mui/icons-material/HelpSharp'
+import HelpSharpIcon from '@mui/icons-material/HelpSharp';
 import Tooltip from '@mui/material/Tooltip';
 import Slider from '@mui/material/Slider';
 import { RadioSelector } from './RadioSelector'
 import Modal from '@mui/material/Modal';
-import IconButton from '@mui/material/IconButton'
+import IconButton from '@mui/material/IconButton';
+import { useState } from 'react';
 
 import './Sidebar.css';
 
@@ -17,6 +18,8 @@ const options = [
 const tooltipInfo = "click for more info";
 
 export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear, showTrace, setShowTrace, setCriticName, magnitude }) {
+    const [showInfo, setShowInfo] = useState({'point_info': false, 'critic_info': false, 'stepper_info': false});
+
     function handleChange() {
         setShowTrace(!showTrace);
     }
@@ -26,9 +29,10 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
         onClear();
     }
 
-    function handleInfoClick(e) {
-        console.log(e.target)
+    function switchInfoShow(e, where) {
+        setShowInfo(prevState => ({...prevState, [where]: !prevState[where]}));
     }
+    console.log(showInfo);
     return (
         <>
             <div className="sidebar--container">
@@ -37,7 +41,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                     <div className="sidebar--title">
                         <h4>Settings:</h4>
                         <Tooltip title={tooltipInfo}>
-                            <IconButton onClick={handleInfoClick} size="small">
+                            <IconButton onClick={e => switchInfoShow(e,'point_info')} size="small">
                                 <HelpSharpIcon color="primary" />
                             </IconButton>
                         </Tooltip>
@@ -72,7 +76,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 <div className="sidebar--title">
                     <h4>Choose critic:</h4>
                     <Tooltip title={tooltipInfo}>
-                        <IconButton onClick={handleInfoClick} size="small">
+                    <IconButton onClick={e => switchInfoShow(e,'critic_info')} size="small">
                             <HelpSharpIcon color="primary" />
                         </IconButton>
                     </Tooltip>
@@ -88,7 +92,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 <div className="sidebar--title">
                     <h4>Gradient Stepper:</h4>
                     <Tooltip title={tooltipInfo}>
-                        <IconButton onClick={handleInfoClick} size="small">
+                    <IconButton onClick={e => switchInfoShow(e,'stepper_info')} size="small">
                             <HelpSharpIcon color="primary" />
                         </IconButton>
                     </Tooltip>
@@ -114,7 +118,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 Check <a href="https://github.com/ben-karr/react-3d-gradients" target="_blank" rel="noopener noreferrer">this</a> Github repo or <a href="https://forums.fast.ai" target="_blank" rel="noopener noreferrer">this</a> Fast.ai forums thread for more information about this application.
             </div>
 
-            <Modal open={false}>
+            <Modal open={showInfo['point_info']} onClose={(e)=>switchInfoShow(e,'point_info')}>
                 <div className='modal'>
                     Pick one of the three critics. The critic is used to determine how far away our current predictions are away from the acctuall values.
                     The loss is calculated by
