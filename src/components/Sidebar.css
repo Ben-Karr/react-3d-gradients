@@ -71,6 +71,16 @@
     padding-inline: 3px ;
   }
 
+.MuiFormControl-root{
+  margin: 0px !important;
+  width: 100%;
+}
+
+.MuiOutlinedInput-input {
+  padding: 7px !important;
+  padding-right: 30px !important;
+}
+
 .sidebar--footer{
     font-size: x-small;
     font-style: italic;

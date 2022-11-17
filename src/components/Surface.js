@@ -39,6 +39,7 @@ export class Surface extends Component {
                 },
                 { // current point (a,b) | inject data on render
                     type: 'scatter3d',
+                    name: 'Point (a,b)',
                     marker: {
                         color: 'white', 
                         size:3, 
@@ -48,11 +49,13 @@ export class Surface extends Component {
                             width: 1,
                         },
                     },
+                    hovertemplate: "a: %{x:.2f} b: %{y:.2f}<br>loss: %{z:,.2f} <extra></extra>",
                 },   
                 { // loss's gradients at (a,b) | inject data on render
                     type: 'scatter3d',
                     mode: 'lines',
                     opacity: 1,
+                    hoverinfo: "none",
                     line: {
                         width: 6,
                         color: 'lightslategray',

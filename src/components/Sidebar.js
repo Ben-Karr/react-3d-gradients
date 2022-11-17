@@ -1,23 +1,20 @@
-import Select from 'react-select';
+import { useState } from 'react';
+
+import IconButton from '@mui/material/IconButton';
 import HelpSharpIcon from '@mui/icons-material/HelpSharp';
 import Tooltip from '@mui/material/Tooltip';
 import Slider from '@mui/material/Slider';
-import { RadioSelector } from './RadioSelector'
 import Modal from '@mui/material/Modal';
-import IconButton from '@mui/material/IconButton';
-import { useState } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { RadioSelector } from './RadioSelector';
 
 import './Sidebar.css';
 
-const options = [
-    { value: 'mae', label: 'Mean Average Error' },
-    { value: 'mse', label: 'Mean Square Error' },
-    { value: 'rmse', label: 'Root Mean Square Error' },
-];
-
 const tooltipInfo = "click for more info";
 
-export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear, showTrace, setShowTrace, setCriticName, magnitude }) {
+export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear, showTrace, setShowTrace, criticName, setCriticName, magnitude }) {
     const [showInfo, setShowInfo] = useState({'point_info': false, 'critic_info': false, 'stepper_info': false});
 
     function handleChange() {
@@ -25,7 +22,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
     }
 
     function handleCriticChange(e) {
-        setCriticName(e.value);
+        setCriticName(e.target.value);
         onClear();
     }
 
@@ -82,11 +79,16 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                     </Tooltip>
                 </div>
                 <div className="sidebar--loss">
+                <FormControl sx={{ m: 1}}>
                     <Select
-                        options={options}
-                        defaultValue={options[1]}
+                        value={criticName}
                         onChange={handleCriticChange}
-                    />
+                        >
+                        <MenuItem value={'mae'}><small>Mean Absolute Error</small></MenuItem>
+                        <MenuItem value={'mse'}><small>Mean Square Error</small></MenuItem>
+                        <MenuItem value={'rmse'}><small>Root Mean Square Error</small></MenuItem>
+                    </Select>
+                </FormControl>
                     <p>Loss: {Math.round(loss * 100, 2) / 100}</p>
                 </div>
                 <div className="sidebar--title">

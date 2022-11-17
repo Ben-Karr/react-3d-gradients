@@ -1,4 +1,4 @@
-// Mean Average Error
+// Mean Absolute Error
 function mae(targets, preds) {
     let loss = 0;
     for (let i=0; i<targets.length; i++){
