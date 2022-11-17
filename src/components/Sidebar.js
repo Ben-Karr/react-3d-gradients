@@ -3,6 +3,9 @@ import HelpSharpIcon from '@mui/icons-material/HelpSharp'
 import Tooltip from '@mui/material/Tooltip';
 import Slider from '@mui/material/Slider';
 import { RadioSelector } from './RadioSelector'
+import Modal from '@mui/material/Modal';
+import IconButton from '@mui/material/IconButton'
+
 import './Sidebar.css';
 
 const options = [
@@ -22,14 +25,21 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
         setCriticName(e.value);
         onClear();
     }
+
+    function handleInfoClick(e) {
+        console.log(e.target)
+    }
     return (
         <>
             <div className="sidebar--container">
+
                 <div className="sidebar--point">
                     <div className="sidebar--title">
                         <h4>Settings:</h4>
                         <Tooltip title={tooltipInfo}>
-                            <HelpSharpIcon color="primary" />
+                            <IconButton onClick={handleInfoClick} size="small">
+                                <HelpSharpIcon color="primary" />
+                            </IconButton>
                         </Tooltip>
                     </div>
                     <span><b>a:</b> {pointAB[0].toFixed(2)}</span>
@@ -62,7 +72,9 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 <div className="sidebar--title">
                     <h4>Choose critic:</h4>
                     <Tooltip title={tooltipInfo}>
-                        <HelpSharpIcon color="primary" />
+                        <IconButton onClick={handleInfoClick} size="small">
+                            <HelpSharpIcon color="primary" />
+                        </IconButton>
                     </Tooltip>
                 </div>
                 <div className="sidebar--loss">
@@ -76,7 +88,9 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 <div className="sidebar--title">
                     <h4>Gradient Stepper:</h4>
                     <Tooltip title={tooltipInfo}>
-                        <HelpSharpIcon color="primary" />
+                        <IconButton onClick={handleInfoClick} size="small">
+                            <HelpSharpIcon color="primary" />
+                        </IconButton>
                     </Tooltip>
                 </div>
                 <div className="sidebar--stepper">
@@ -99,6 +113,16 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
             <div className="sidebar--footer">
                 Check <a href="https://github.com/ben-karr/react-3d-gradients" target="_blank" rel="noopener noreferrer">this</a> Github repo or <a href="https://forums.fast.ai" target="_blank" rel="noopener noreferrer">this</a> Fast.ai forums thread for more information about this application.
             </div>
+
+            <Modal open={false}>
+                <div className='modal'>
+                    Pick one of the three critics. The critic is used to determine how far away our current predictions are away from the acctuall values.
+                    The loss is calculated by
+                    <p>c(y, f<sub>a,b</sub>(x))</p>
+                    <p> where f<sub>a,b</sub>(x)=a·x<sup>2</sup>+b·x</p>
+                    <p> c is the critic. </p>
+                </div>
+            </Modal>
         </>
     )
 }

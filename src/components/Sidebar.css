@@ -8,31 +8,31 @@
     justify-content: space-between;
   }
   
-  .sidebar h3 {
+.sidebar h3 {
     color: #313131;
   }
   
-  .sidebar--title {
+.sidebar--title {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   
-  .sidebar--point {
+.sidebar--point {
     display: flex;
     flex-flow: column;
   }
   
-  .slider {
+.slider {
     align-self: center;
     width: 90%;
   }
   
-  .sidebar--buttons {
+.sidebar--buttons {
     margin-top: 20px;
   }
   
-  .sidebar button{
+.sidebar--buttons button{
     width: 100%;
     margin-top: 10px;
     border-radius: 9px;
@@ -43,27 +43,43 @@
     color: whitesmoke;
   }
   
-  .sidebar--trace {
+.sidebar--trace {
     padding: 5px;
     display: flex;
     justify-content: right;
   }
   
-  .MuiRadio-root {
+.MuiRadio-root {
     padding: 0px !important;
   }
   
-  .MuiFormGroup-root {
+.MuiFormGroup-root {
     justify-content: center;
   }
   
-  .MuiFormControlLabel-root {
+.MuiFormControlLabel-root {
     padding-inline: 3px ;
   }
 
-  .sidebar--footer{
+.sidebar--footer{
     font-size: x-small;
     font-style: italic;
     padding-bottom: 10px;
     text-align: center;
+  }
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    min-height: 200px;
+    background: whitesmoke;
+    box-shadow: 2px 2px 20px 2px lightgray;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    color: #313131;
   }
