@@ -32,14 +32,14 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
     function switchInfoShow(e, where) {
         setShowInfo(prevState => ({...prevState, [where]: !prevState[where]}));
     }
-    console.log(showInfo);
+
     return (
         <>
             <div className="sidebar--container">
 
                 <div className="sidebar--point">
                     <div className="sidebar--title">
-                        <h4>Settings:</h4>
+                        <h4>Change:</h4>
                         <Tooltip title={tooltipInfo}>
                             <IconButton onClick={e => switchInfoShow(e,'point_info')} size="small">
                                 <HelpSharpIcon color="primary" />
@@ -101,7 +101,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                     <div>
                         <i>Learning Rate:</i>
                         <RadioSelector lr={lr} setLr={setLr} />
-                        <i>Gradients Magnitude</i>: {magnitude.toFixed(2)}<br />
+                        <i>Gradients Magnitude</i>:<br/>{magnitude.toFixed(2)}<br />
                         <i>Stepsize</i>: {(lr * magnitude).toFixed(3)}
                     </div>
                     <div className="sidebar--buttons">
@@ -120,11 +120,22 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
 
             <Modal open={showInfo['point_info']} onClose={(e)=>switchInfoShow(e,'point_info')}>
                 <div className='modal'>
-                    Pick one of the three critics. The critic is used to determine how far away our current predictions are away from the acctuall values.
-                    The loss is calculated by
-                    <p>c(y, f<sub>a,b</sub>(x))</p>
-                    <p> where f<sub>a,b</sub>(x)=a·x<sup>2</sup>+b·x</p>
-                    <p> c is the critic. </p>
+                    In the first plot you see 100 blue points. Those can be assumed as some observed data points (x<sub>i</sub>,y<sub>i</sub>), and our goal is to find a quadratic function f(x)=a·x<sup>2</sup>+b·x that "best" predicts the values y<sub>i</sub> at the points x<sub>i</sub>. The quadratic f is the red curve in that plot and can be changed by moving the sliders for a and b.
+                </div>
+            </Modal>
+
+            <Modal open={showInfo['critic_info']} onClose={(e)=>switchInfoShow(e,'critic_info')}>
+                <div className='modal'>
+                    Since we want to find the "best" quadratic function that predicts the "observed" points we have to think about what "best" means. Most likely it makes sense to measure the distance of each given point to the predicted one and summerize the results to one single value. The three different options -- called critics -- here are <b>Mean Absolute Error</b>(<i>MAE</i>)<br/>
+                    <i>MAE(f(x<sub>i</sub>),y<sub>i</sub>) = 1/100 Σ |f(x<sub>i</sub>)-y<sub>i</sub>|</i>
+                    Since we want to find the "best" quadratic function that predicts the "observed" points we have to think about what "best" means. Most likely it makes sense to measure the distance of each given point to the predicted one and summerize the results to one single value. The three different options -- called critics -- here are <b>Mean Absolute Error</b>(<i>MAE</i>)<br/>
+                    <i>MAE(f(x<sub>i</sub>),y<sub>i</sub>) = 1/100 Σ |f(x<sub>i</sub>)-y<sub>i</sub>|</i>
+                </div>
+            </Modal>
+
+            <Modal open={showInfo['stepper_info']} onClose={(e)=>switchInfoShow(e,'stepper_info')}>
+                <div className='modal'>
+                    What does the stepper do?
                 </div>
             </Modal>
         </>

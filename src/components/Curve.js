@@ -4,12 +4,12 @@ export  function Curve({xs, ys, pointAB, guessedYs}) {
     const plot_layout = 
         {
             autosize: true,
-            title: 'Data Points with approximation f',
+            title: 'Data Points with approximation f<sub>a,b</sub>',
             xaxis: {
                 title: 'x'
             },
             yaxis: {
-                title: `f(x)=${pointAB[0].toFixed(2)}·x<sup>2</sup> + ${pointAB[1].toFixed(2)}·x`,
+                title: `f<sub>a,b</sub>(x)=${pointAB[0].toFixed(2)}·x<sup>2</sup> + ${pointAB[1].toFixed(2)}·x`,
             },
             showlegend: true,
             legend: {
@@ -39,9 +39,16 @@ export  function Curve({xs, ys, pointAB, guessedYs}) {
             x: xs,
             y: guessedYs,
             type: 'scatter',
-            mode: 'lines',
-            marker: {color: 'red'},
-            name: 'f',
+            mode: 'markers+lines',
+            marker: {
+                color: 'red',
+                opacity: 0.4,
+                line: {
+                    color: 'black',
+                    width: 0.5,
+                }
+            },
+            name: 'f<sub>a,b</sub>',
         }
-    return <Plot data={[pointsData, curveData]} layout={plot_layout} config={{responsive: true}} className="plots--curve"/>
+    return <Plot data={[curveData, pointsData]} layout={plot_layout} config={{responsive: true}} className="plots--curve"/>
 }

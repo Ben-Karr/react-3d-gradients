@@ -102,6 +102,14 @@ function App() {
           />
         </aside>
         <div className="plots">
+          <div className="plots--curve-wrapper">
+            <Curve 
+              xs={xs} 
+              ys={ys}
+              pointAB={pointAB}
+              guessedYs={guessedYs}
+            />
+          </div>
           <div className="plots--surface-wrapper">
             <Surface 
               pointAB={pointAB} 
@@ -113,14 +121,6 @@ function App() {
               lossTrace={(lossTrace.length > 1 && showTrace) ? lossTrace : []}
               magnitude={magnitude}
               criticName={criticName}
-            />
-          </div>
-          <div className="plots--curve-wrapper">
-            <Curve 
-              xs={xs} 
-              ys={ys}
-              pointAB={pointAB}
-              guessedYs={guessedYs}
             />
           </div>
         </div>

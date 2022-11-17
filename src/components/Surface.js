@@ -87,7 +87,7 @@ export class Surface extends Component {
             ],
             layout: {
                 autosize: true,
-                title: 'Loss surface',
+                title: 'Loss surface with gradients at (a,b)',
                 scene: {
                     xaxis: {
                         title: 'a'

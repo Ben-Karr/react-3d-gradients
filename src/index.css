@@ -26,16 +26,16 @@ body {
 }
 
 .plots--curve-wrapper{
-  min-width: 500px;
+  min-width: 400px;
   flex: 1;
 }
 
 .plots--surface {
   width: 90%;
-  min-height: 700px;
+  min-height: 900px;
 }
 
 .plots--curve {
   width: 90%;
-  min-height: 700px;
+  min-height: 900px;
 }
