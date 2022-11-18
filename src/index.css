@@ -32,10 +32,10 @@ body {
 
 .plots--surface {
   width: 90%;
-  min-height: 900px;
+  min-height: 700px;
 }
 
 .plots--curve {
   width: 90%;
-  min-height: 900px;
+  min-height: 700px;
 }
