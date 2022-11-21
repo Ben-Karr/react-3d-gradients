@@ -10,8 +10,8 @@
   
 .sidebar h4 {
     color: #313131;
-    margin-top: 15px;
-    margin-bottom: 7px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
   
 .sidebar--title {
@@ -19,6 +19,10 @@
     align-items: center;
     justify-content: space-between;
   }
+
+.info {
+  justify-content: flex-start;
+}
   
 .sidebar--point {
     display: flex;

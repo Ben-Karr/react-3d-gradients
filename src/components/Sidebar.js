@@ -10,6 +10,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { RadioSelector } from './RadioSelector';
 
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
+
 import './Sidebar.css';
 
 const tooltipInfo = "click for more info";
@@ -35,8 +38,8 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
             <div className="sidebar--container">
 
                 <div className="sidebar--point">
-                    <div className="sidebar--title">
-                        <h4>Change:</h4>
+                    <div className="sidebar--title info">
+                        <h4>Info:</h4>
                         <Tooltip title={tooltipInfo}>
                             <IconButton onClick={e => switchInfoShow(e,'point_info')} size="small">
                                 <HelpSharpIcon color="primary" />
@@ -134,6 +137,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
             <Modal open={showInfo['stepper_info']} onClose={(e)=>switchInfoShow(e,'stepper_info')}>
                 <div className='modal'>
                     What does the stepper do?
+                    <InlineMath>f(x) = 3\cdot x^2+ 2\cdot x</InlineMath>
                 </div>
             </Modal>
         </>
