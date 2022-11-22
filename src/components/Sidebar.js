@@ -4,15 +4,12 @@ import IconButton from '@mui/material/IconButton';
 import HelpSharpIcon from '@mui/icons-material/HelpSharp';
 import Tooltip from '@mui/material/Tooltip';
 import Slider from '@mui/material/Slider';
-import Modal from '@mui/material/Modal';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
+import { Modals } from './Modals';
 import { RadioSelector } from './RadioSelector';
-
-import 'katex/dist/katex.min.css';
-import { InlineMath } from 'react-katex';
-
 import './Sidebar.css';
 
 const tooltipInfo = "click for more info";
@@ -123,23 +120,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 If you have any questions or improvements: get in touch via <a href="https://github.com/ben-karr/react-3d-gradients" target="_blank" rel="noopener noreferrer">Github</a> or the <a href="https://forums.fast.ai" target="_blank" rel="noopener noreferrer">Fast.ai</a> forums.
             </div>
 
-            <Modal open={showInfo['point_info']} onClose={(e)=>switchInfoShow(e,'point_info')}>
-                <div className='modal'>
-                    In the first plot you see 100 blue points. Those can be assumed as some observed data points (x<sub>i</sub>,y<sub>i</sub>), and our goal is to find a quadratic function f(x)=a·x<sup>2</sup>+b·x that "best" predicts the values y<sub>i</sub> at the points x<sub>i</sub>. The quadratic f is the red curve in that plot and can be changed by moving the sliders for a and b.
-                </div>
-            </Modal>
-            <Modal open={showInfo['critic_info']} onClose={(e)=>switchInfoShow(e,'critic_info')}>
-                <div className='modal'>
-                    Since we want to find the "best" quadratic function that predicts the "observed" points we have to think about what "best" means. Most likely it makes sense to measure the distance of each given point to the predicted one and summerize the results to one single value. The three different options -- called critics -- here are <b>Mean Absolute Error</b>(<i>MAE</i>)<br/>
-                    <i>MAE(f(x<sub>i</sub>),y<sub>i</sub>) = 1/100 Σ |f(x<sub>i</sub>)-y<sub>i</sub>|</i>
-                </div>
-            </Modal>
-            <Modal open={showInfo['stepper_info']} onClose={(e)=>switchInfoShow(e,'stepper_info')}>
-                <div className='modal'>
-                    What does the stepper do?
-                    <InlineMath>f(x) = 3\cdot x^2+ 2\cdot x</InlineMath>
-                </div>
-            </Modal>
+            <Modals showInfo={showInfo} switchInfoShow={switchInfoShow}/>
         </>
     )
 }

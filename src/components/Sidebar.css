@@ -99,7 +99,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 700px;
     min-height: 200px;
     background: whitesmoke;
     padding: 15px;
@@ -108,5 +108,8 @@
     border-radius: 10px;
     color: #313131;
     font-size: smaller;
+  }
+
+  .modal h4 {
     text-align: center;
   }
