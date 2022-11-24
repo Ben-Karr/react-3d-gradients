@@ -82,6 +82,8 @@ function App() {
     setClearTrace(true);
   }
 
+  console.log(`The gradient at (${pointAB[0]},${pointAB[1]}) is: ${gradients}`);
+
   return (
       <div className="container">
         <aside className="sidebar">

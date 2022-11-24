@@ -101,6 +101,7 @@
     transform: translate(-50%, -50%);
     width: 700px;
     min-height: 200px;
+    max-height: 800px;
     background: whitesmoke;
     padding: 15px;
     box-shadow: 2px 2px 20px 2px lightgray;
@@ -108,8 +109,12 @@
     border-radius: 10px;
     color: #313131;
     font-size: smaller;
+    overflow: scroll;
   }
 
   .modal h4 {
     text-align: center;
+    color: #1969d2;
+    margin-top: 20px;
+    margin-bottom: 7px; 
   }
