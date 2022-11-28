@@ -101,9 +101,9 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 </div>
                 <div className="sidebar--stepper">
                     <div>
+                        <i>Gradients Magnitude</i>:<br/>{magnitude.toFixed(2)}<br />
                         <i>Learning Rate:</i>
                         <RadioSelector lr={lr} setLr={setLr} />
-                        <i>Gradients Magnitude</i>:<br/>{magnitude.toFixed(2)}<br />
                         <i>Stepsize</i>: {(lr * magnitude).toFixed(3)}
                     </div>
                     <div className="sidebar--buttons">
