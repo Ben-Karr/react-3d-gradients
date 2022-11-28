@@ -4,7 +4,7 @@ export  function Curve({xs, ys, pointAB, guessedYs}) {
     const plot_layout = 
         {
             autosize: true,
-            title: 'Data Points with approximation f<sub>a,b</sub>',
+            title: 'Data Points with the predictor function f<sub>a,b</sub>',
             xaxis: {
                 title: 'x'
             },
