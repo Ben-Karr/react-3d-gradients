@@ -50,15 +50,15 @@ The Gradient Stepper performs the steps of gradient descent with a chosen learni
 
 The goal of <a href="https://en.wikipedia.org/wiki/Gradient_descent#Description" target="_blank" rel="noopener noreferrer">Gradient Descent</a> is to find the local minimum of some (multi-variable, differentiable) function $F$. The process can be described as:
 
-*Start with some non-specific guess, $\alpha_0$ say,</li>
-*calculate the gradient of $F$ at $\alpha_0" />: $\nabla F(\alpha_0)$,</li>
-*calculate the new guess as: $\alpha_1=\alpha_0 - \gamma \cdot \nabla F(\alpha_0)$,</li>
-*if $0 < \gamma$ is small enough then $F(\alpha_1) < F(\alpha_0)$,</li>
-*iterating that process converges to the local minimum.</li>
+* Start with some non-specific guess, $\alpha_0$ say,</li>
+* calculate the gradient of $F$ at $\alpha_0$: $\nabla F(\alpha_0)$,</li>
+* calculate the new guess as: $\alpha_1=\alpha_0 - \gamma \cdot \nabla F(\alpha_0)$,</li>
+* if $0 < \gamma$ is small enough then $F(\alpha_1) < F(\alpha_0)$,</li>
+* iterating that process converges to the local minimum.</li>
 
 <b>Note:</b> For our stepper $\gamma$ is given by <b>Learning Rate</b> and the initial value $\alpha_0$ is $(1,1)$ by default. So the first step would calculate the gradient of $\text{loss}$ at $(1,1)$ which is: $\nabla \text{loss}(1,1)$.
 
-##And what was the Gradient again?##
+## And what was the Gradient again? ##
 
 In the case of a multi-variable function as here, the <a href="https://en.wikipedia.org/wiki/Gradient" target="_blank" rel="noopener noreferrer">gradient</a> of a function at some point is the vector of <a href="https://en.wikipedia.org/wiki/Partial_derivative" target="_blank" rel="noopener noreferrer">partial derivates</a> at that point. Lets pick $\text{mse}$ as our critic then the gradient of $\text{loss}$ at $(1,1)$ would be:
 $$
