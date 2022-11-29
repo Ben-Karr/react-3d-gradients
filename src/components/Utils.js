@@ -14,7 +14,7 @@ function generateNoise(scale) {
     return (Math.random()-0.5) * scale;
 }
 
-export function addNoise(x, multScale=1.2, addScale=25) {
+export function addNoise(x, multScale=1.2, addScale=15) {
     return x * (1+generateNoise(multScale)) + generateNoise(addScale);
 }
 
