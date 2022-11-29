@@ -14,7 +14,7 @@ import './Sidebar.css';
 
 const tooltipInfo = "click for more info";
 
-export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear, showTrace, setShowTrace, criticName, setCriticName, magnitude }) {
+export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear, showTrace, setShowTrace, criticName, setCriticName, magnitude, paramsAB }) {
     const [showInfo, setShowInfo] = useState({'point_info': false, 'critic_info': false, 'stepper_info': false});
 
     function handleChange() {
@@ -46,8 +46,9 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                     <span><b>a:</b> {pointAB[0].toFixed(2)}</span>
                     <div className="slider">
                         <Slider
-                            min={-1.}
-                            max={6. - 0.23} // subtract a tiny margin (stepsize of a|b grid) to keep all values of the slider inside the surface
+                            min={paramsAB['minA']}
+                            max={paramsAB['maxA'] - 0.2} // subtract a tiny margin (stepsize of a|b grid) to keep all values of the slider inside the surface
+                            // To-Do: calc margin from data
                             step={0.01}
                             value={pointAB[0]}
                             onChange={(e, v) => {
@@ -59,8 +60,8 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                     <span><b>b:</b> {pointAB[1].toFixed(2)}</span>
                     <div className="slider">
                         <Slider
-                            min={-4.}
-                            max={8 - 0.4}
+                            min={paramsAB['minB']}
+                            max={paramsAB['maxB'] - 0.4}
                             step={0.01}
                             value={pointAB[1]}
                             onChange={(e, v) => {

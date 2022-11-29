@@ -27,10 +27,11 @@ const initialLoss = initialCritic['lossFunc'](ys, initialGuess);
 const initialGrads = initialCritic['calcGrads'](initialAB);
 const initialMagnitude = norm(initialGrads);
 
-const as = generatePoints(-1, 6, 30); // x-axis in surface plot
-const bs = generatePoints(-4, 8, 30); // y-axis in surface plot
-const initialLs = generateSurface(as, bs, xs, ys, initialCritic['lossFunc']) // height|z-axis in surface plot
 
+const paramsAB = {'minA': 0, 'maxA': 6, 'minB': -4, 'maxB': 8};
+const as = generatePoints(paramsAB['minA'], paramsAB['maxA'], 30); // x-axis in surface plot
+const bs = generatePoints(paramsAB['minB'], paramsAB['maxB'], 30); // y-axis in surface plot
+const initialLs = generateSurface(as, bs, xs, ys, initialCritic['lossFunc']) // height|z-axis in surface plot
 
 function App() {
   const [pointAB, setPointAB]       = useState(initialAB);
@@ -98,6 +99,7 @@ function App() {
             criticName={criticName}
             setCriticName={setCriticName}
             magnitude={magnitude}
+            paramsAB={paramsAB}
           />
         </aside>
         <div className="plots">
