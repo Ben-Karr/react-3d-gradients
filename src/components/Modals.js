@@ -1,6 +1,4 @@
 import Modal from '@mui/material/Modal';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
 
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
@@ -10,11 +8,6 @@ export function Modals({showInfo, switchInfoShow}) {
         <>
             <Modal open={showInfo['point_info']} onClose={(e)=>switchInfoShow(e,'point_info')}>
                 <div className='modal'>
-                    <div className="close-modal">
-                        <IconButton onClick={e => switchInfoShow(e,'point_info')} size="small">
-                            <CloseIcon color="black" />
-                        </IconButton>
-                    </div>
                     <h4>The Setup:</h4>
                     <div>
                         Assume that we collected some data as input-output-pairs (<i>blue circles</i>) and we want to find a function that takes an input value and predicts the corresponding output. In this particular example we generated a hundret points <InlineMath math="(x_i,y_i)"/> such that <BlockMath math="y_i = 3 \cdot x_i^2 + 2 \cdot x_i + \epsilon_i"/> where the values <InlineMath math="x_i"/> are evenly distributed between <InlineMath math="-10"/> and <InlineMath math="10"/> and <InlineMath math="\epsilon_i"/> is some randomly generated noise (to resemble "natuarlly" collected data).
@@ -43,11 +36,6 @@ export function Modals({showInfo, switchInfoShow}) {
 
             <Modal open={showInfo['critic_info']} onClose={(e)=>switchInfoShow(e,'critic_info')}>
                 <div className='modal'>
-                    <div className="close-modal">
-                        <IconButton onClick={e => switchInfoShow(e,'critic_info')} size="small">
-                            <CloseIcon color="black" />
-                        </IconButton>
-                    </div>
                     <h4>The Critic:</h4>
                     <div>
                         A critic measures the average distance from the targets <InlineMath math="y_i"/> to the predictions <InlineMath math="\hat{y_i}=f_{a,b}(x_i)"/>.
@@ -73,11 +61,6 @@ export function Modals({showInfo, switchInfoShow}) {
 
             <Modal open={showInfo['stepper_info']} onClose={(e)=>switchInfoShow(e,'stepper_info')}>
                 <div className='modal'>
-                    <div className="close-modal">
-                        <IconButton onClick={e => switchInfoShow(e,'stepper_info')} size="small">
-                            <CloseIcon color="black" />
-                        </IconButton>
-                    </div>
                     <h4>Gradient Stepper</h4>
                     <div>
                         The Gradient Stepper performs the steps of gradient descent with a chosen learning rate.

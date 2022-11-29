@@ -61,7 +61,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                     <div className="slider">
                         <Slider
                             min={paramsAB['minB']}
-                            max={paramsAB['maxB'] - 0.4}
+                            max={paramsAB['maxB'] - 0.2}
                             step={0.01}
                             value={pointAB[1]}
                             onChange={(e, v) => {

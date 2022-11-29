@@ -114,11 +114,6 @@
   .modal h4 {
     text-align: center;
     color: #1969d2;
-    margin-top: 20px;
+    margin-top: 12px;
     margin-bottom: 7px; 
-  }
-
-  .close-modal {
-    margin-bottom: -35px;
-    text-align: right;
   }

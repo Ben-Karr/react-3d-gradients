@@ -28,7 +28,7 @@ const initialGrads = initialCritic['calcGrads'](initialAB);
 const initialMagnitude = norm(initialGrads);
 
 
-const paramsAB = {'minA': 0, 'maxA': 6, 'minB': -4, 'maxB': 8};
+const paramsAB = {'minA': 0, 'maxA': 6, 'minB': -1, 'maxB': 5};
 const as = generatePoints(paramsAB['minA'], paramsAB['maxA'], 30); // x-axis in surface plot
 const bs = generatePoints(paramsAB['minB'], paramsAB['maxB'], 30); // y-axis in surface plot
 const initialLs = generateSurface(as, bs, xs, ys, initialCritic['lossFunc']) // height|z-axis in surface plot
@@ -40,7 +40,7 @@ function App() {
   const [gradients, setGradients]   = useState(initialGrads);
   const [lr, setLr]                 = useState(1E-4);
   const [lossTrace, setLossTrace]   = useState([[initialAB[0], initialAB[1], initialLoss]]);
-  const [addTrace, setAddTrace]       = useState(false);
+  const [addTrace, setAddTrace]     = useState(false);
   const [showTrace, setShowTrace]   = useState(true);
   const [criticName, setCriticName] = useState(initialCriticName);
   const [critic, setCritic]         = useState(initialCritic);
