@@ -23,9 +23,9 @@ export function Modals({showInfo, switchInfoShow}) {
                     </div>
                     <h4>Basic Controls</h4>
                     <div>
-                        In order to do so we can use the sliders to change <b>a</b> and <b>b</b> and try to visually fit <InlineMath math="f_{a,b}"/> or use the <b>loss</b> value as an indicator of how good our prediction is — the lower the value the better. The function that maps a point <InlineMath math="(a,b)"/> to its loss value is called the <b>loss function</b> (see <b>Choose critic</b> for more details).
+                        We can use the sliders to change <b>a</b> and <b>b</b> and try to visually fit <InlineMath math="f_{a,b}"/> or use the <b>loss</b> value as an indicator of how good our prediction is — the lower the value the better. The function that maps a point <InlineMath math="(a,b)"/> to its loss value is called the <b>loss function</b> (see <b>Choose critic</b> for more details).
                         <br/><br/>
-                        We can chose from different <b>critics</b>, which changes how the loss function measures the difference between the targets and the predictions. This also changes the magnitude of the loss value and likewise the shape of the surface plot, where each of the points on the surface is a point in <InlineMath math="3"/>-dimensional space consisting of some <InlineMath math="a"/>, <InlineMath math="b"/> and the loss of <InlineMath math="(a,b)"/>. In particular the point that is given by the current <InlineMath math="a, b"/> and their loss is highlighted as a <i>white circle</i>.
+                        We can chose from different <b>critics</b>, which changes how the loss function measures the difference between the targets and the predictions. This also changes the magnitude of the loss value and likewise the shape of the <b>surface plot</b>, where each of the points on the surface is a point in <InlineMath math="3"/>-dimensional space consisting of some <InlineMath math="a"/>, <InlineMath math="b"/> and the loss of <InlineMath math="(a,b)"/>. In particular the point that is given by the current <InlineMath math="a, b"/> and their loss is highlighted as a <i>white circle</i>.
                     </div>
                     <h4>The Gradient Arrow</h4>
                     <div>
@@ -34,8 +34,8 @@ export function Modals({showInfo, switchInfoShow}) {
                     </div>
                     <h4>The Gradient Stepper</h4>
                     <div>
-                        The control pannel provides a value <b>Gradient Magnitude</b> which is the length of the gradient vector at the current point. This value might be very high, such that if we'd step the whole length of the gradient we'd overstep and walk off the surface rather than towards the minimum. We can scale the gradient vector by chosing an appropriate learning rate and the value <b>Stepsize</b> shows the result.
-                        The appropriate learning rate can vary vastly by the critic we chose as well as how far away or close the current point is to the minimum. If the loss diverged using the sliders moves the current point back on the surface.
+                        The control pannel provides a value <b>Gradient Magnitude</b> which is the length of the gradient vector at the current point. This value might be very high, such that if we'd step the whole length of the gradient we'd overstep and walk off the surface rather than towards the minimum. We can scale the gradient vector by chosing an appropriate <b>Learning Rate</b> and the value <b>Stepsize</b> shows the result.
+                        The appropriate learning rate can vary vastly by the critic we chose as well as on how far away or close the current point is to the minimum. If the loss diverged using the sliders moves the current point back on the surface.
                     </div>
                     <h4> Click Step and have fun! </h4>
                 </div>

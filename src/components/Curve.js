@@ -50,5 +50,5 @@ export  function Curve({xs, ys, pointAB, guessedYs}) {
             },
             name: 'f<sub>a,b</sub>',
         }
-    return <Plot data={[curveData, pointsData]} layout={plot_layout} config={{responsive: true}} className="plots--curve"/>
+    return <Plot data={[pointsData, curveData]} layout={plot_layout} config={{responsive: true}} className="plots--curve"/>
 }
