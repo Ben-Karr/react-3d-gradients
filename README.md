@@ -26,9 +26,9 @@ The appropriate learning rate can vary vastly by the critic we chose as well as 
 A critic measures the average distance from the targets $y_i$ to the predictions $\hat{y_i}=f_{a,b}(x_i)$.
 The three critics that are availabel are:
 
-* Mean Absolute Error: $$\text{mae}(y,\hat{y})=\frac{1}{m}\sum_{i=1}^{m}|y_i - \hat{y_i}|,$$</li>
-* Mean Square Error: $$\text{mse}(y,\hat{y})=\frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y_i})^2,$$</li>
-* Root Mean Square Error: $$\text{rmse}(y,\hat{y})=\sqrt{\frac{1}{m}\sum_{i=1}^{m}(y_i - \hat{y_i})^2,}$$</li>
+* Mean Absolute Error: $$\text{mae}(y,\hat{y})=\frac{1}{m}\sum_{i=1}^{m}|y_i - \hat{y_i}|,$$
+* Mean Square Error: $$\text{mse}(y,\hat{y})=\frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y_i})^2,$$
+* Root Mean Square Error: $$\text{rmse}(y,\hat{y})=\sqrt{\frac{1}{m}\sum_{i=1}^{m}(y_i - \hat{y_i})^2,}$$
 
 where $m$ is the number of observed instances (100 here).
 
@@ -62,16 +62,16 @@ The goal of <a href="https://en.wikipedia.org/wiki/Gradient_descent#Description"
 
 In the case of a multi-variable function as here, the <a href="https://en.wikipedia.org/wiki/Gradient" target="_blank" rel="noopener noreferrer">gradient</a> of a function at some point is the vector of <a href="https://en.wikipedia.org/wiki/Partial_derivative" target="_blank" rel="noopener noreferrer">partial derivates</a> at that point. Lets pick $\text{mse}$ as our critic then the gradient of $\text{loss}$ at $(1,1)$ would be:
 $$
-\nabla \text{loss} (1,1) = \begin{pmatrix} \frac{\partial \text{loss}}{\partial a}(1,1) \\ \frac{\partial \text{loss}}{\partial b}(1,1) \end{pmatrix} \approx \begin{pmatrix} -7910.767 \\ -15.146 \end{pmatrix},
+\nabla \text{loss} (1,1) = \begin{pmatrix} \frac{\partial \text{loss}}{\partial a}(1,1) \newline \frac{\partial \text{loss}}{\partial b}(1,1) \end{pmatrix} \approx \begin{pmatrix} -7910.767 \newline -15.146 \end{pmatrix},
 $$
 so a vector in the $2$-dimensional parameter space. 
 
 ## The importance of the learning rate ##
 
 If we follow that example it gets quiet obvious why we need $\gamma$. Assume we don't scale the gradient (set $\gamma = 1$) our second guess would be 
-$$\begin{pmatrix} 1 \\ 1 \end{pmatrix} - 1 \cdot \nabla \text{loss} (1,1) \approx \begin{pmatrix} 1 \\ 1 \end{pmatrix} - \begin{pmatrix} -7910.767 \\ -15.146 \end{pmatrix} = \begin{pmatrix} -7909.767 \\ -14.146 \end{pmatrix},$$
+$$\begin{pmatrix} 1 \newline 1 \end{pmatrix} - 1 \cdot \nabla \text{loss} (1,1) \approx \begin{pmatrix} 1 \newline 1 \end{pmatrix} - \begin{pmatrix} -7910.767 \newline -15.146 \end{pmatrix} = \begin{pmatrix} -7909.767 \newline -14.146 \end{pmatrix},$$
 which is clearly no improvement. So it's crutial to understand that the gradient only provides the direction into we have to step but not how big or small our step should be. Using a learning rate of 1E-4$=0.0001$ the first step produces:
 $$ 
-\begin{pmatrix} 1 \\ 1 \end{pmatrix} - \gamma \cdot \nabla\text{loss}(1,1) = \begin{pmatrix} 1 \\ 1 \end{pmatrix} - 0.0001 \cdot \begin{pmatrix} -7910.767 \\ -15.146 \end{pmatrix}   = \begin{pmatrix} 1.7910767 \\ 1.0015146 \end{pmatrix} 
+\begin{pmatrix} 1 \newline 1 \end{pmatrix} - \gamma \cdot \nabla\text{loss}(1,1) = \begin{pmatrix} 1 \newline 1 \end{pmatrix} - 0.0001 \cdot \begin{pmatrix} -7910.767 \newline -15.146 \end{pmatrix}   = \begin{pmatrix} 1.7910767 \newline 1.0015146 \end{pmatrix} 
 $$ 
 which works out much better. On the other hand: using a different critic say $\text{rmse}$ results in way smaller loss values, thus in smaller gradients and hence a bigger learning rate should be used to get reasonable step sizes.
