@@ -6,7 +6,7 @@ import { Sidebar } from './components/Sidebar'
 import { Curve } from './components/Curve'
 import { Surface } from './components/Surface'
 
-const DEBUG = true;
+const DEBUG = false;
 
 const xStart = -10;
 const xEnd = 10;
@@ -55,7 +55,6 @@ function App() {
     setLoss(newLoss);
     setGradients(newGrads);
     if (addTrace) {
-      console.log('on step change effect: ', [...pointAB,newLoss]);
       setLossTrace(prevTrace => [...prevTrace, [...pointAB, newLoss]])
       setAddTrace(false);
     };
@@ -81,8 +80,6 @@ function App() {
   function onClear(){
     setClearTrace(true);
   }
-
-  console.log(`The gradient at (${pointAB[0]},${pointAB[1]}) is: ${gradients}`);
 
   return (
       <div className="container">
