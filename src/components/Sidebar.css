@@ -20,7 +20,7 @@
     justify-content: space-between;
   }
 
-.info {
+.flush-right {
   justify-content: flex-end;
 }
   

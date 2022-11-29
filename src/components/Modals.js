@@ -6,7 +6,7 @@ import { InlineMath, BlockMath } from 'react-katex';
 export function Modals({showInfo, switchInfoShow}) {
     return (
         <>
-            <Modal open={showInfo['point_info']} onClose={(e)=>switchInfoShow(e,'point_info')}>
+            <Modal open={showInfo['general_info']} onClose={(e)=>switchInfoShow(e,'general_info')}>
                 <div className='modal'>
                     <h4>The Setup:</h4>
                     <div>

@@ -15,9 +15,10 @@ import './Sidebar.css';
 const tooltipInfo = "click for more info";
 
 export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear, showTrace, setShowTrace, criticName, setCriticName, magnitude, paramsAB }) {
-    const [showInfo, setShowInfo] = useState({'point_info': false, 'critic_info': false, 'stepper_info': false});
 
-    function handleChange() {
+    const [showInfo, setShowInfo] = useState({'general_info': false, 'critic_info': false, 'stepper_info': false});
+
+    function switchTraceShow() {
         setShowTrace(!showTrace);
     }
 
@@ -26,19 +27,18 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
         onClear();
     }
 
-    function switchInfoShow(e, where) {
-        setShowInfo(prevState => ({...prevState, [where]: !prevState[where]}));
+    function switchInfoShow(e, modal) {
+        setShowInfo(prevState => ({...prevState, [modal]: !prevState[modal]}));
     }
 
     return (
         <>
             <div className="sidebar--container">
-
                 <div className="sidebar--point">
-                    <div className="sidebar--title info">
+                    <div className="sidebar--title flush-right">
                         <h4>Info:</h4>
                         <Tooltip title={tooltipInfo}>
-                            <IconButton onClick={e => switchInfoShow(e,'point_info')} size="small">
+                            <IconButton onClick={e => switchInfoShow(e,'general_info')} size="small">
                                 <HelpSharpIcon color="primary" />
                             </IconButton>
                         </Tooltip>
@@ -74,7 +74,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 <div className="sidebar--title">
                     <h4>Choose critic:</h4>
                     <Tooltip title={tooltipInfo}>
-                    <IconButton onClick={e => switchInfoShow(e,'critic_info')} size="small">
+                        <IconButton onClick={e => switchInfoShow(e,'critic_info')} size="small">
                             <HelpSharpIcon color="primary" />
                         </IconButton>
                     </Tooltip>
@@ -84,18 +84,18 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                     <Select
                         value={criticName}
                         onChange={handleCriticChange}
-                        >
+                    >
                         <MenuItem value={'mae'}><small>Mean Absolute Error</small></MenuItem>
                         <MenuItem value={'mse'}><small>Mean Square Error</small></MenuItem>
                         <MenuItem value={'rmse'}><small>Root Mean Square Error</small></MenuItem>
                     </Select>
                 </FormControl>
-                    <p>Loss: {Math.round(loss * 100, 2) / 100}</p>
+                    <p>Loss: {loss.toFixed(2)}</p>
                 </div>
                 <div className="sidebar--title">
                     <h4>Gradient Stepper:</h4>
                     <Tooltip title={tooltipInfo}>
-                    <IconButton onClick={e => switchInfoShow(e,'stepper_info')} size="small">
+                        <IconButton onClick={e => switchInfoShow(e,'stepper_info')} size="small">
                             <HelpSharpIcon color="primary" />
                         </IconButton>
                     </Tooltip>
@@ -111,7 +111,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                         <button className="button-step" onClick={onStep}>Step</button>
                         <button className="button-clear" onClick={onClear}>Clear Trace</button>
                         <div className="sidebar--trace">
-                            <input id="trace" type="checkbox" value={showTrace} onChange={handleChange} />
+                            <input id="trace" type="checkbox" value={showTrace} onChange={switchTraceShow} />
                             <label htmlFor="trace">Hide Trace</label>
                         </div>
                     </div>
@@ -120,7 +120,6 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
             <div className="sidebar--footer">
                 If you have any questions or improvements: you can get in touch via <a href="https://github.com/ben-karr/react-3d-gradients" target="_blank" rel="noopener noreferrer">Github</a> or the <a href="https://forums.fast.ai" target="_blank" rel="noopener noreferrer">Fast.ai</a> forums.
             </div>
-
             <Modals showInfo={showInfo} switchInfoShow={switchInfoShow}/>
         </>
     )
