@@ -66,7 +66,7 @@ export function Modals({showInfo, switchInfoShow}) {
                     </div>
                     <br/>
                     <div>
-                        <b>Note:</b> Finding values <InlineMath math="a,b"/> such that <InlineMath math="\text{loss}(a,b)"/> is minimal is what we mean by finding a quadratic function <InlineMath math="f_{a,b}"/> that "best" predicts the target values <InlineMath math="y_i"/>.
+                        <b>Note:</b> Finding values <InlineMath math="a,b"/> such that <InlineMath math="\text{loss}(a,b)"/> is minimal is what we mean by finding a quadratic function <InlineMath math="f_{a,b}"/> that <i>best predicts</i> the target values <InlineMath math="y_i"/>.
                     </div>
                 </div>
             </Modal>
@@ -107,7 +107,7 @@ export function Modals({showInfo, switchInfoShow}) {
                         If we follow that example it gets quiet obvious why we need <InlineMath math="\gamma"/>. Assume we don't scale the gradient (set <InlineMath math="\gamma = 1"/>) our second guess would be 
                         <BlockMath math="\begin{pmatrix} 1 \\ 1 \end{pmatrix} - 1 \cdot \nabla \text{loss} (1,1) \approx \begin{pmatrix} 1 \\ 1 \end{pmatrix} - \begin{pmatrix} -7910.767 \\ -15.146 \end{pmatrix} = \begin{pmatrix} -7909.767 \\ -14.146 \end{pmatrix},"/>
                         which is clearly no improvement. So it's crutial to understand that the gradient only provides the direction into we have to step but not how big or small our step should be. Using a learning rate of 1E-4<InlineMath math="=0.0001"/> the first step produces:
-                        <BlockMath math="\begin{align*} \begin{pmatrix} 1 \\ 1 \end{pmatrix} - \gamma \cdot \nabla\text{loss}(1,1) &= \begin{pmatrix} 1 \\ 1 \end{pmatrix} - 0.0001 \cdot \begin{pmatrix} -7910.767 \\ -15.146 \end{pmatrix}   = \begin{pmatrix} 1.7910767 \\ 1.0015146 \end{pmatrix} \end{align*}"/> which works out much better. On the other hand: using a different critic say <InlineMath math="\text{rmse}"/> results in way smaller loss values, thus in smaller gradients and hence a bigger learning rate should be used to get reasonable step sizes.
+                        <BlockMath math="\begin{align*} \begin{pmatrix} 1 \\ 1 \end{pmatrix} - \gamma \cdot \nabla\text{loss}(1,1) &= \begin{pmatrix} 1 \\ 1 \end{pmatrix} - 0.0001 \cdot \begin{pmatrix} -7910.767 \\ -15.146 \end{pmatrix}   = \begin{pmatrix} 1.7910767 \\ 1.0015146 \end{pmatrix} \end{align*}"/> which works out much better. On the other hand: using a different critic, say <InlineMath math="\text{rmse}"/>, results in way smaller loss values, thus in smaller gradients and hence a bigger learning rate should be used to get reasonable step sizes.
                     </div>
                 </div>
             </Modal>
