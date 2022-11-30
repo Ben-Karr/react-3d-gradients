@@ -2,8 +2,8 @@ import Plot from 'react-plotly.js'
 import { scaleLinear } from 'd3'
 import { Component } from 'react'
 
-const magnitudeMins = {'mae': 27, 'mse': 90,'rmse': 2}
-const magnitudeMaxs = {'mae': 3300, 'mse': 16000, 'rmse': 43}
+const magnitudeMins = {'mae': 15, 'mse': 50,'rmse': 1}
+const magnitudeMaxs = {'mae': 3300, 'mse': 13000, 'rmse': 43}
 
 export class Surface extends Component {
     constructor(props) {
@@ -123,7 +123,7 @@ export class Surface extends Component {
         // Use scaled gradients to represent the changing magnitude while keeping it "in the picture"
         const gradientScale = scaleLinear()
             .domain([magnitudeMins[criticName], magnitudeMaxs[criticName]])
-            .range([0.5 , 2]);
+            .range([0.5 , 4]);
         const scalar = gradientScale(magnitude);
         const [normalGradA, normalGradB] = gradients.map(x=>x/magnitude);
 
