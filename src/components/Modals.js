@@ -25,7 +25,7 @@ export function Modals({showInfo, switchInfoShow}) {
                         The 3D-plot also shows a representation of the negative gradient of the loss function at <InlineMath math="(a,b)"/> (<i>gray arrow</i>). The value <b>Gradients Magnitude</b> shows the acctual length of the gradient, which can be very big or small such that it might make the arrow invisable or the only thing visible in the plot. Hence the arrow representation scales with the gradients length, but in a fixed intervall.
                         <br/><br/>
                         The negative gradient at <InlineMath math="(a,b)"/> is a vector in the (here <InlineMath math="2"/>-dimensional) parameter space which points into the direction in which the loss decreases most quickly. 
-                        In particular this means that if we — starting from some point <InlineMath math="(a,b)"/> — step into the direction of the negative gradient at <InlineMath math="(a,b)"/>: the loss decreases. Performing this over and over steps us towards the local minimum. There is one constraint to this: <b>The size of the steps have to be small enough</b>. (Also see <b>Gradient Stepper</b> for more details).
+                        The important part here is: If we — starting from some point <InlineMath math="(a,b)"/> — step into the direction of the negative gradient at <InlineMath math="(a,b)"/>: the loss decreases. Performing this over and over steps us towards the local minimum. There is one constraint to that: <b>The size of the steps have to be small enough</b>. (Also see <b>Gradient Stepper</b> for more details).
                     </div>
                     <h4>The Gradient Stepper</h4>
                     <div>
