@@ -24,17 +24,18 @@ export function Modals({showInfo, switchInfoShow}) {
                     <div>
                         The 3D-plot also shows a representation of the negative gradient of the loss function at <InlineMath math="(a,b)"/> (<i>gray arrow</i>). The value <b>Gradients Magnitude</b> shows the acctual length of the gradient, which can be very big or small such that it might make the arrow invisable or the only thing visible in the plot. Hence the arrow representation scales with the gradients length, but in a fixed intervall.
                         <br/><br/>
-                        The negative gradient is a vector in the (here <InlineMath math="2"/>-dimensional) parameter space which points into the direction of a local minimum. 
-                        This means that if we — starting from some point <InlineMath math="(a,b)"/> — step into the direction of the negative gradient at <InlineMath math="(a,b)"/>: the loss decreases . There is one constraint to that: <b>The size of the step has to be small enough</b>. (Also see <b>Gradient Stepper</b> for more details).
+                        The negative gradient at <InlineMath math="(a,b)"/> is a vector in the (here <InlineMath math="2"/>-dimensional) parameter space which points into the direction in which the loss decreases most quickly. 
+                        In particular this means that if we — starting from some point <InlineMath math="(a,b)"/> — step into the direction of the negative gradient at <InlineMath math="(a,b)"/>: the loss decreases. Performing this over and over steps us towards the local minimum. There is one constraint to this: <b>The size of the steps have to be small enough</b>. (Also see <b>Gradient Stepper</b> for more details).
                     </div>
                     <h4>The Gradient Stepper</h4>
                     <div>
-                        As mentioned above the <i>Gradients Magnitude</i> value might be very high, such that if we'd step its whole length, we'd overstep and walk away from the minimum rather than towards it. We can scale the gradient vector by choosing an appropriate <b>Learning Rate</b> and the value <b>Stepsize</b> shows the result.
-                        The appropriate learning rate can vary vastly by the critic we chose as well as on how far away or close to the minimum the current point is.
-                        <br/><br/>
-                        If the loss diverged using the sliders moves the current point back on the surface.
-                    </div>
+                        As mentioned above the <i>Gradients Magnitude</i> value might be very high, such that if we'd step its whole length, we'd overstep and walk away from the lolcal minimum rather than towards it. We can scale the gradient vector by choosing an appropriate <b>Learning Rate</b> and the value <b>Stepsize</b> shows the result.
+                        The appropriate learning rate can vary vastly by the critic we chose as well as by how far away or close to the local minimum the current point is.
+                        </div>
                     <h4> Click Step and have fun! </h4>
+                    <div>
+                        <b>Note:</b> If the loss diverged, using the sliders moves the current point back on the surface.
+                    </div>
                 </div>
             </Modal>
 
