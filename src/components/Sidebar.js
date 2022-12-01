@@ -118,7 +118,7 @@ export function Sidebar({ pointAB, setPointAB, loss, lr, setLr, onStep, onClear,
                 </div>
             </div>
             <div className="sidebar--footer">
-                If you have any questions or improvements: you can get in touch via <a href="https://github.com/ben-karr/react-3d-gradients" target="_blank" rel="noopener noreferrer">Github</a> or the <a href="https://forums.fast.ai" target="_blank" rel="noopener noreferrer">Fast.ai</a> forums.
+                If you have any questions or improvements: you can get in touch with me via <a href="https://github.com/ben-karr/react-3d-gradients" target="_blank" rel="noopener noreferrer">Github</a> or the <a href="https://forums.fast.ai/t/3d-gradient-descent-webapp/102384" target="_blank" rel="noopener noreferrer">Fast.ai</a> forums.
             </div>
             <Modals showInfo={showInfo} switchInfoShow={switchInfoShow}/>
         </>
