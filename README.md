@@ -1,7 +1,9 @@
 # 3D Gradient Descent WebApp
 
 This app tries to visualize gradient descent of a loss function with two parameters, resulting in a loss surface in $3$-dimensional space.
+
 [![app_impression](./assets/app_impression.png)](https://ben-karr.github.io/react-3d-gradients)
+
 It uses the following technologies:
 * [react](https://reactjs.org/) for state management,
 * [mui](https://mui.com/) for UI components,
