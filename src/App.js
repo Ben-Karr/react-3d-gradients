@@ -6,7 +6,7 @@ import { Sidebar } from './components/Sidebar'
 import { Curve } from './components/Curve'
 import { Surface } from './components/Surface'
 
-const DEBUG = false;
+const DEBUG = true;
 
 const xStart = -10;
 const xEnd = 10;
