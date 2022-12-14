@@ -16,7 +16,7 @@ function mae(targets, preds) {
         sumA += -Math.pow(xs[i],2)*sign;
         sumB += -xs[i]*sign;
     }
-    return [sumA, sumB];
+    return [sumA, sumB].map(x=>x/xs.length);
 }
 
 // Mean Square Error
