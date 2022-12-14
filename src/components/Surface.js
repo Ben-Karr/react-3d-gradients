@@ -2,8 +2,8 @@ import Plot from 'react-plotly.js'
 import { scaleLinear } from 'd3'
 import { Component } from 'react'
 
-const magnitudeMins = {'mae': 15, 'mse': 50,'rmse': 1}
-const magnitudeMaxs = {'mae': 3300, 'mse': 13000, 'rmse': 43}
+const magnitudeMins = {'mae': 0, 'mse': 50,'rmse': 1}
+const magnitudeMaxs = {'mae': 33, 'mse': 13000, 'rmse': 43}
 
 export class Surface extends Component {
     constructor(props) {
